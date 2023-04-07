@@ -9,6 +9,7 @@
     width: 100%;
     background-color: white;
     height: 60px;
+    transition: 0.5s;
 }
 .button__front {
     padding: 10px;
@@ -26,6 +27,9 @@
     transition: 0.5s;
 }
 
+.button:hover > .button__bg {
+    background-color: yellow;
+}
 .button:hover > .button__front {
     background-position: right center;
 }         

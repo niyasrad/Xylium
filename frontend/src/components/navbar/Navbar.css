@@ -1,7 +1,3 @@
-.mobile-nav {
-    display: none;
-}
-
 .navbar {
     width: 100%;
     padding: 5px;
@@ -28,10 +24,32 @@
     color: var(--xylium-color-pink);
 }
 
+.mobile-nav {
+    display: none;
+}
+.mobile-nav__center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mobile-nav__open {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 30px;
+    top: 30px;
+}
+.mobile-nav__logo {
+    font-size: 32px;
+    text-align: center;
+}
 
 @media only screen and (max-width: 990px) {
     .navbar {
         display: none;
+    }
+    .mobile-nav {
+        display: unset;
     }
 }
 

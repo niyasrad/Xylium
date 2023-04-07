@@ -31,14 +31,14 @@
     color: var(--xylium-color-pink);
 }
 .landing__art{
-    max-width: 50%;
+    max-width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .landing__controller {
     min-width: 380px;
-    max-width: 500px;
+    max-width: 600px;
     height: auto;
 }
 
@@ -53,5 +53,30 @@
     .landing__content {
         max-width: 90vw;
         width: 90vw;
+    }
+    .landing__controller {
+        max-width: 550px;
+    }
+}
+
+@media only screen and (max-width: 990px) {
+    .landing__main {
+        flex-direction: column;
+        gap: 40px;
+        padding-top: 30px;
+        justify-content: unset;
+    }
+    .landing__description {
+        align-items: center;
+        text-align: center;
+        gap: 40px;
+        width: auto;
+        padding: 20px;
+    }
+    .landing__description h1 {
+        font-size: 22px;
+    }
+    .landing__description h2 {
+        font-size: 20px;
     }
 }
