@@ -1,0 +1,37 @@
+.mobile-nav {
+    display: none;
+}
+
+.navbar {
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.navbar__logo {
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.navbar__right {
+    display: flex;
+    gap: 70px;
+}
+.navbar__link {
+    font-weight: 400;
+    font-size: 22px;
+}
+.navbar__link--pink {
+    color: var(--xylium-color-pink);
+}
+
+
+@media only screen and (max-width: 990px) {
+    .navbar {
+        display: none;
+    }
+}
+
