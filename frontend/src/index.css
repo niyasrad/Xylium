@@ -4,7 +4,7 @@
     
     --xylium-bg: linear-gradient(359.68deg, #000000 0.26%, #1B2025 99.71%);
 
-    --xylium-button: linear-gradient(180deg, #CC208E 0%, #6713D2 100%);
+    --xylium-button: linear-gradient(to right, #CC208E 0%, #6713D2 51%, #CC208E 100%);
     --xylium-profiles: linear-gradient(180deg, #007ADF 0%, #00ECBC 100%);
 
     --xylium-color-pink: #FF5F9E;
@@ -12,6 +12,9 @@
 
     font-family: 'Jura', sans-serif;
     color: white;
+    background-image: var(--xylium-bg);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
 }
 
 * {

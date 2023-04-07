@@ -1,9 +1,6 @@
 .landing {
     width: 100vw;
-    height: 100vh;
-    background-image: var(--xylium-bg);
-    background-attachment: fixed;
-    background-repeat: no-repeat;
+    height: auto;
     display: flex;
     justify-content: center;
 }
@@ -11,5 +8,50 @@
 .landing__content {
     max-width: 70vw;
     width: 70vw;
-    padding-top: 30px;    
+    padding-top: 30px; 
+    height: calc(100vh - 200px);   
+    min-height: 700px;
+}
+
+.landing__main {
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+.landing__description {
+    max-width: 500px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    align-items: flex-start;
+}
+.landing__para {
+    color: var(--xylium-color-pink);
+}
+.landing__art{
+    max-width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.landing__controller {
+    min-width: 380px;
+    max-width: 500px;
+    height: auto;
+}
+
+@media only screen and (max-width: 1500px) {
+    .landing__content {
+        max-width: 80vw;
+        width: 80vw;
+    }
+}
+
+@media only screen and (max-width: 1300px) {
+    .landing__content {
+        max-width: 90vw;
+        width: 90vw;
+    }
 }
