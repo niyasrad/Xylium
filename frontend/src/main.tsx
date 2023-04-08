@@ -5,12 +5,22 @@ import { createBrowserRouter } from 'react-router-dom'
 import App from './App'
 import Landing from './containers/landing/Landing'
 import './index.css'
+import LogIn from './user/login/LogIn'
+import SignUp from './user/signup/SignUp'
 
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Landing />
+    element: <Landing />,
+  },
+  {
+    path: '/signup',
+    element: <SignUp />
+  },
+  {
+    path: '/login',
+    element: <LogIn />
   }
 ])
 

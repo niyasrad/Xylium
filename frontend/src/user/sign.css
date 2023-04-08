@@ -1,0 +1,81 @@
+.sign {
+    width: 100vw;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    padding-top: 80px;
+    box-sizing: border-box;
+}
+
+
+.sign__content {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    align-items: center;
+}
+
+
+.sign__info{
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+.sign__info h2 {
+    color: var(--xylium-color-pink);
+}
+
+
+.sign__fields {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+.sign__button {
+    position: relative;
+}
+.sign__field {
+    width: 260px;
+    max-width: 80vw;
+    height: 50px;
+    padding: 10px;
+    box-sizing: border-box;
+    z-index: 1;
+    position: relative;
+    font-family: 'Jura', sans-serif;
+    font-size: 18px;
+}
+.sign__field-screen {
+    position: absolute;
+    z-index: 0;
+    top: 10px;
+    left: 10px;
+    width: 260px;
+    max-width: 80vw;
+    height: 50px;
+    background-image: var(--xylium-button);
+}
+
+
+.sign__submit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+.sign__submit p{
+    max-width: 80%;
+    text-align: center;
+}
+.sign__submit-text {
+    font-size: 20px;
+    font-weight: 400;
+}
+.sign__submit-text--pink {
+    color: var(--xylium-color-pink);
+    cursor: pointer;
+}
