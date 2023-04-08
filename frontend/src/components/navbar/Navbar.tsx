@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import './Navbar.css'
 
 export default function Navbar() {
@@ -16,9 +17,9 @@ export default function Navbar() {
                     <a href="#" className="navbar__logo">Xylium</a>
                 </div>
                 <div className="navbar__right">
-                    <a href="#" className="navbar__link navbar__link--pink">Try</a>
-                    <a href="#" className="navbar__link">Support</a>
-                    <a href="#" className="navbar__link">GitHub</a>
+                    <Link to="/login" className="navbar__link navbar__link--pink">Try</Link>
+                    <a href="https://discord.gg/YypaF6bg" target="_blank" className="navbar__link">Support</a>
+                    <a href="https://github.com/niyasrad" target="_blank" className="navbar__link">GitHub</a>
                 </div>
             </div>
             <div className="mobile-nav">
@@ -56,7 +57,7 @@ export default function Navbar() {
                                     </svg>
 
                                 </div>
-                                <a href="#" className="navbar__link navbar__link--pink">Try</a>
+                                <Link to="/login" className="navbar__link navbar__link--pink">Try</Link>
                                 <a href="#" className="navbar__link">Support</a>
                                 <a href="#" className="navbar__link">GitHub</a>
                             </motion.div>

@@ -6,6 +6,7 @@ import { motion, useMotionValue } from "framer-motion";
 import controller from '../../assets/controller.svg'
 
 import './Landing.css'
+import { Link } from "react-router-dom";
 
 export default function Landing() {
 
@@ -33,9 +34,9 @@ export default function Landing() {
                         <h2 className="landing__para">
                         Xylium takes your Steam profile, transforms the data into your pleasant viewports.
                         </h2>
-                        <a href="#">
+                        <Link to="/login">
                             <Button text="Try Xylium"/>
-                        </a>
+                        </Link>
                     </div>
                     <motion.div 
                         onMouseMove={handleMouseMove}
