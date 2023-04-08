@@ -17,7 +17,7 @@ export default function Navbar() {
                 <div className="navbar__right">
                     <a href="#" className="navbar__link navbar__link--pink">Try</a>
                     <a href="#" className="navbar__link">Support</a>
-                    <a href="#" className="navbar__link">About</a>
+                    <a href="#" className="navbar__link">GitHub</a>
                 </div>
             </div>
             <div className="mobile-nav">
@@ -42,7 +42,7 @@ export default function Navbar() {
                                 </div>
                                 <a href="#" className="navbar__link navbar__link--pink">Try</a>
                                 <a href="#" className="navbar__link">Support</a>
-                                <a href="#" className="navbar__link">About</a>
+                                <a href="#" className="navbar__link">GitHub</a>
                             </div>
                         </>
                     )
