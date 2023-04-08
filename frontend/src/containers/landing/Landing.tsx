@@ -43,7 +43,7 @@ export default function Landing() {
                         transition = {{ duration: 0.3, type: 'spring', ease: "easeOut" }}
                         className="landing__art"
                     >
-                        <img className="landing__controller" src={controller} alt="controller"/>
+                        <img className="landing__controller link" src={controller} alt="controller"/>
                     </motion.div>
                 </motion.div>
                 
