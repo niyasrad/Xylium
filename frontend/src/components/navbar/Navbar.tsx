@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
 import './Navbar.css'
 
@@ -27,12 +28,27 @@ export default function Navbar() {
                     </svg>
                     <a href="#" className="mobile-nav__logo">Xylium</a>
                 </div>
+                <AnimatePresence>
                 {
                     sidebarOpen &&
                     (   
                         <>
-                            <div className="mobile-nav__wrapper" onClick={handleClose}></div>
-                            <div className="mobile-nav__sidebar">
+                            <motion.div
+                                initial = {{ opacity: 0 }}
+                                animate = {{ opacity: 0.5 }}
+                                exit = {{ opacity: 0 }}
+                                transition = {{ duration: 0.3 }}
+                                className="mobile-nav__wrapper" 
+                                onClick={handleClose}
+                            ></motion.div>
+                            <motion.div 
+                                initial = {{ x: -500 }}
+                                animate = {{ x: 0 }}
+                                exit = {{ x: -500 }}
+                                transition = {{ duration: 0.5, type: 'spring' }}
+
+                                className="mobile-nav__sidebar"
+                            >
                                 <div className="mobile-nav__options">
                                     <h1>Xylium</h1>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" onClick={handleClose} viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="mobile-nav__close">
@@ -43,11 +59,11 @@ export default function Navbar() {
                                 <a href="#" className="navbar__link navbar__link--pink">Try</a>
                                 <a href="#" className="navbar__link">Support</a>
                                 <a href="#" className="navbar__link">GitHub</a>
-                            </div>
+                            </motion.div>
                         </>
                     )
                 }
-                
+                </AnimatePresence>
             </div>
         </>
     )
