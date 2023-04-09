@@ -34,12 +34,12 @@ export default function Landing() {
                     className="landing__main"
                 >
                     <div className="landing__description">
-                        <h1>
+                        <div className="landing__heading">
                         Personalized Steam Profile Access, with achievements, games, info, much more.
-                        </h1>
-                        <h2 className="landing__para">
+                        </div>
+                        <div className="landing__para">
                         Xylium takes your Steam profile, transforms the data into your pleasant viewports.
-                        </h2>
+                        </div>
                         <Link to="/login">
                             <Button text="Try Xylium"/>
                         </Link>

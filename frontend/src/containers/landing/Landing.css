@@ -15,7 +15,6 @@
 
 .landing__main {
     display: flex;
-    height: 100%;
     justify-content: space-between;
     align-items: center;
 }
@@ -28,8 +27,14 @@
     gap: 50px;
     align-items: flex-start;
 }
+.landing__heading {
+    font-size: 26px;
+    font-weight: 600;
+}
 .landing__para {
     color: var(--xylium-color-pink);
+    font-size: 24px;
+    font-weight: 400;
 }
 .landing__art{
     max-width: 80vw;
@@ -40,8 +45,8 @@
     justify-content: center;
 }
 .landing__controller {
-    min-width: 380px;
-    max-width: 100%;
+    min-width: 320px;
+    max-width: 500px;
     height: auto;
 }
 
@@ -76,10 +81,16 @@
         width: auto;
         padding: 20px;
     }
-    .landing__description h1 {
+    .landing__heading {
         font-size: 22px;
+        font-weight: 600;
     }
-    .landing__description h2 {
+    .landing__para {
+        color: var(--xylium-color-pink);
         font-size: 20px;
+        font-weight: 400;
+    }
+    .landing__art {
+        height: unset;
     }
 }

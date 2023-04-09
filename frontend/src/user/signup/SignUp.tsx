@@ -58,8 +58,8 @@ export default function SignUp() {
         <div className="sign">
             <div className="sign__content">
                 <div className="sign__info">
-                    <h1>Xylium</h1>
-                    <h2>Create an Account</h2>
+                    <div className="sign__heading">Xylium</div>
+                    <div className="sign__description">Create an Account</div>
                 </div>
                 <div className="sign__fields">
                     <div className="sign__button">

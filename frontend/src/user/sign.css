@@ -25,8 +25,13 @@
     text-align: center;
     align-items: center;
 }
-.sign__info h2 {
+.sign__heading {
+    font-size: 28px;
+    font-weight: 600;
+}
+.sign__description {
     color: var(--xylium-color-pink);
+    font-size: 24px;
 }
 
 
@@ -63,7 +68,7 @@
 
 .sign__error {
     width: 70%;
-    height: 100px;
+    height: 80px;
     color: var(--xylium-color-darkpink);
     font-size: 20px;
     text-align: center;
@@ -87,4 +92,18 @@
 .sign__submit-text--pink {
     color: var(--xylium-color-pink);
     cursor: pointer;
+}
+
+@media only screen and (max-width: 990px) {
+    .sign {
+        padding-top: 30px;
+    }
+    .sign__heading {
+        font-size: 26px;
+        font-weight: 600;
+    }
+    .sign__description {
+        color: var(--xylium-color-pink);
+        font-size: 22px;
+    }
 }
