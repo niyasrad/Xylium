@@ -52,7 +52,7 @@ router.post('/signin', async (req, res) => {
             message: "Please check your credentials!"
         })
     }
-    
+
     const match = await bcrpyt.compare(req.body.password, user.password)
     
     if (!match) {
@@ -69,7 +69,7 @@ router.post('/signin', async (req, res) => {
     })
 })
 
-router.get('/test', authMiddleWare, (req, res) => {
+router.get('/checkauth', authMiddleWare, (req, res) => {
     res.status(200).json({
         message: "Yes, you are authenticated."
     })

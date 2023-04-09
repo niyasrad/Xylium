@@ -13,7 +13,7 @@
 .sign__content {
     display: flex;
     flex-direction: column;
-    gap: 80px;
+    gap: 30px;
     align-items: center;
 }
 
@@ -58,6 +58,15 @@
     max-width: 80vw;
     height: 50px;
     background-image: var(--xylium-button);
+}
+
+
+.sign__error {
+    width: 70%;
+    height: 100px;
+    color: var(--xylium-color-darkpink);
+    font-size: 20px;
+    text-align: center;
 }
 
 

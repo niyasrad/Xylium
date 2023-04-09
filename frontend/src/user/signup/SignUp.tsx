@@ -1,6 +1,8 @@
+import axios from "axios";
 import { motion } from "framer-motion";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppWrapperContext } from "../../AppWrapper";
 import Button from "../../components/button/Button";
 import '../sign.css'
 
@@ -10,6 +12,47 @@ export default function SignUp() {
     const [password, setPassword] = useState<string>('')
     const [steamID, setSteamID] = useState<string>('')
 
+    const [errMessage, setErrMessage] = useState<string>('')
+
+    const { isLoggedIn, setIsLoggedIn } = useAppWrapperContext()
+    const navigate = useNavigate()
+
+    const handleSubmit = () => {
+
+        if (username.length < 3) {
+            setErrMessage("Username/SteamID needs to be longer than 2 Characters!")
+            return
+        }
+        if (password.length < 5) {
+            setErrMessage("Password needs to be longer than 4 Characters!")
+            return
+        }
+        if (steamID.length == 0) {
+            setErrMessage("Please provide with the SteamID")
+        }
+
+        axios.post('http://localhost:8080/api/signup', {
+            username: username,
+            password: password,
+            steamid: steamID
+        })
+        .then((res) => {
+            localStorage.setItem("accessToken", res.data.accessToken)
+            axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.accessToken}`
+            setIsLoggedIn!(true)
+            navigate('/home')
+        })
+        .catch((err) => {
+            setIsLoggedIn!(false)
+            setErrMessage(err.response.data.message)
+        })
+    }
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            navigate('/home', { replace: true })
+        }   
+    }, [isLoggedIn])
 
     return (
         <div className="sign">
@@ -32,9 +75,12 @@ export default function SignUp() {
                         <div className="sign__field-screen"></div>
                     </div>
                 </div>
+                <div className="sign__error">
+                    {errMessage}
+                </div>
                 <div className="sign__submit">
                     <p className="sign__submit-text">Already have an account? <Link to="/login" className="sign__submit-text--pink">Log in</Link></p>
-                    <Button text="Sign up"/>
+                    <Button text="Sign up" onClick={handleSubmit}/>
                 </div>
             </div>
         </div>
