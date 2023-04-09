@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../../components/button/Button";
 import Navbar from "../../components/navbar/Navbar";
 import { motion, useMotionValue } from "framer-motion";
@@ -18,6 +18,12 @@ export default function Landing() {
         x.set(clientX * 0.05)
         y.set(clientY * 0.02)
     }
+
+    useEffect(() => {
+        fetch('http://localhost:8080/server')
+        .then((res) => console.log(res))
+    }, [])
+    
     return (
         <div className="landing">
             <div className="landing__content">
