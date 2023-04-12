@@ -1,0 +1,59 @@
+.steam-bar {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    max-width: 600px;
+}
+.steam-bar__name {
+    background: linear-gradient(180deg, #CC208E 0%, #6713D2 100%);
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+    font-weight: 600;
+    font-size: 22px;
+}
+
+.steam-bar__identity {
+    width: 100%;
+    display: flex;
+}
+.steam-bar__id {
+    background: linear-gradient(359.68deg, #000000 0.26%, #1B2025 99.71%);
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 20px;
+    color: var(--xylium-color-pink);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-weight: 500;
+    width: 80%;
+}
+.steam-bar__id-small {
+    font-size: 16px;
+    color: var(--xylium-color-darkpink);
+    font-weight: 500;
+}
+.steam-bar__pic {
+    position: relative;
+    width: 30%;
+}
+.steam-bar__pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.steam-bar__status {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    background-color: greenyellow;
+}
+
+@media only screen and (max-width: 1300px) {
+    .steam-bar {
+        display: none;
+    }
+}

@@ -25,6 +25,8 @@
     justify-content: center;
     align-items: center;
     transition: 0.5s;
+    font-size: 22px;
+    font-weight: 600;
 }
 
 .button:hover > .button__bg {
@@ -33,3 +35,10 @@
 .button:hover > .button__front {
     background-position: right center;
 }         
+
+
+@media only screen and (max-width: 1300px){
+    .button__front {
+        font-size: 20px;
+    }
+}

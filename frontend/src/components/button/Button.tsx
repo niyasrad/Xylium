@@ -11,7 +11,7 @@ export default function Button({ text, onClick }: ButtonProps) {
         <div className="button link" onClick={onClick ? onClick : () => {}}>
             <div className="button__bg"></div>
             <div className="button__front">
-                <h2>{text}</h2>
+                <div>{text}</div>
             </div>
         </div>
     )
