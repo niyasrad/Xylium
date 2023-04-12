@@ -15,7 +15,8 @@ const authMiddleWare = (req, res, next) => {
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err || !decoded) return res.status(400).json({
             message: "Login has failed!"
-        }) 
+        })
+        req.username = decoded.username; 
     })
     next()
 }

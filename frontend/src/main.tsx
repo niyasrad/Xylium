@@ -11,6 +11,7 @@ import SignUp from './user/signup/SignUp'
 // @ts-ignore
 import AnimatedCursor from "react-animated-cursor"
 import AppWrapper from './AppWrapper'
+import Home from './containers/home/Home'
 
 
 const router = createBrowserRouter([
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
     path: '/login',
     element: <LogIn />
   },
+  {
+    path: '/home',
+    element: <Home />
+  }
 ])
 
 

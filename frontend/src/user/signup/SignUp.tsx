@@ -14,7 +14,7 @@ export default function SignUp() {
 
     const [errMessage, setErrMessage] = useState<string>('')
 
-    const { isLoggedIn, setIsLoggedIn } = useAppWrapperContext()
+    const { isLoggedIn, setIsLoggedIn, setGlobalUsername } = useAppWrapperContext()
     const navigate = useNavigate()
 
     const handleSubmit = () => {
@@ -40,10 +40,12 @@ export default function SignUp() {
             localStorage.setItem("accessToken", res.data.accessToken)
             axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.accessToken}`
             setIsLoggedIn!(true)
+            setGlobalUsername!(username)
             navigate('/home')
         })
         .catch((err) => {
             setIsLoggedIn!(false)
+            setGlobalUsername!('')
             setErrMessage(err.response.data.message)
         })
     }

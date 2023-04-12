@@ -5,11 +5,14 @@ import './AppWrapper.css'
 
 interface AppWrapperContextType {
   isLoggedIn : boolean,
-  setIsLoggedIn? : Dispatch<SetStateAction<boolean>>
+  globalUsername: string,
+  setIsLoggedIn? : Dispatch<SetStateAction<boolean>>,
+  setGlobalUsername?: Dispatch<SetStateAction<string>>
 }
 
 const defaultValue = {
-  isLoggedIn: false
+  isLoggedIn: false,
+  globalUsername: ''
 }
 
 const AppWrapperContext = createContext<AppWrapperContextType>(defaultValue)
@@ -19,17 +22,18 @@ export const useAppWrapperContext = () => useContext(AppWrapperContext)
 
 function AppWrapper({ children }: { children: React.ReactNode }) {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(defaultValue.isLoggedIn)
+  const [globalUsername, setGlobalUsername] = useState(defaultValue.globalUsername)
   
   useEffect(() => {
 
     const token = localStorage.getItem("accessToken")
-    console.log(token)
     if (!token) return
 
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
     axios.get('http://localhost:8080/api/checkauth')
-    .then(() => {
+    .then((res) => {
+      setGlobalUsername!(res.data.message ? res.data.message : '')
       setIsLoggedIn(true)
     })
     .catch(() => {
@@ -44,7 +48,9 @@ function AppWrapper({ children }: { children: React.ReactNode }) {
     <AppWrapperContext.Provider
       value = {{
         isLoggedIn,
-        setIsLoggedIn
+        globalUsername,
+        setIsLoggedIn,
+        setGlobalUsername
       }}
     >
       {

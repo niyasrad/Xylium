@@ -1,11 +1,10 @@
 const router = require('express').Router();
 const User = require('../models/user')
+const authMiddleware = require('../utils/auth')
 
-router.get('/:username', async (req, res) => {
+router.get('/', authMiddleware, async (req, res) => {
 
-    const username = req.params.username;
-
-    const user = await User.findOne({ username })
+    const user = await User.findOne({ username: req.username })
     if (!user) {
         return res.status(400).json({
             message: "User not found!"

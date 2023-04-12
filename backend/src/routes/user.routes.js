@@ -71,7 +71,7 @@ router.post('/signin', async (req, res) => {
 
 router.get('/checkauth', authMiddleWare, (req, res) => {
     res.status(200).json({
-        message: "Yes, you are authenticated."
+        message: req.username
     })
 })
 
