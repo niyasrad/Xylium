@@ -19,17 +19,18 @@ router.get('/person/:steamid?', authMiddleware, async (req, res) => {
 
         const data = await result.json()
 
-        if (data.response.players.length > 0) {
-            return res.status(200).json(data.response.players[0])
-        } else {
+        if (result.status !== 200 || data.response.players.length === 0) {
             return res.status(400).json({
-                message: "SteamID not found!"
+                message: "Unable to retrieve player data!"
             })
         }
+        
+        return res.status(200).json(data.response.players[0])
     
     } catch (err) {
-        return res.status(400).json({
-            message: "SteamID not found!"
+        console.error(err);
+        return res.status(500).json({
+            message: "Internal server error!"
         })
     }
     
@@ -52,7 +53,7 @@ router.get('/friends', authMiddleware, async (req, res) => {
 
         const friends = await result.json()
 
-        if (!friends.friendslist || !friends.friendslist.friends) {
+        if (result.status !== 200 || !friends.friendslist || !friends.friendslist.friends) {
             return res.status(400).json({
                 message: "Unable to retrieve friend list!"
             })
@@ -62,8 +63,9 @@ router.get('/friends', authMiddleware, async (req, res) => {
         return res.status(200).json(filteredFriends)
     
     } catch (err) {
-        return res.status(400).json({
-            message: "SteamID not found!"
+        console.error(err);
+        return res.status(500).json({
+            message: "Internal server error!"
         })
     }
 })
@@ -83,12 +85,19 @@ router.get('/recent', authMiddleware, async (req, res) => {
         const result = await fetch("http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=" + process.env.STEAM_KEY + "&steamid=" + steamid)
 
         const games = await result.json()
+
+        if (result.status !== 200 || !games.response || !games.response.games) {
+            return res.status(400).json({
+                message: "Unable to retrieve recently played games!"
+            })
+        }
         
         return res.status(200).json(games.response.games)
     
     } catch (err) {
-        return res.status(400).json({
-            message: "SteamID not found!"
+        console.error(err);
+        return res.status(500).json({
+            message: "Internal server error!"
         })
     }
 })
