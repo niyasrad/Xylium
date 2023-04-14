@@ -9,7 +9,7 @@ export default function Steambar(friend: any) {
     })
 
     useEffect(() => {
-        axios.get('http://localhost:8080/user/person/'+ friend.friend.steamid)
+        axios.get('https://xylium.onrender.com/user/person/'+ friend.friend.steamid)
         .then((res) =>  setHolder(res.data))
     }, [])
 
