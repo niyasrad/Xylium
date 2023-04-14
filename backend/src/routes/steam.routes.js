@@ -12,6 +12,7 @@ router.get('/person/:steamid?', authMiddleware, async (req, res) => {
         })
     }
     const steamid = req.params.steamid ? req.params.steamid : user.steamid;
+    console.log(process.env.STEAM_KEY)
     
     try {
         const result = await fetch("https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+ process.env.STEAM_KEY +"&steamids=" + steamid)
@@ -45,6 +46,7 @@ router.get('/friends', authMiddleware, async (req, res) => {
     }
 
     const steamid = user.steamid
+    console.log(process.env.STEAM_KEY)
     try {
         const result = await fetch("https://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=" + process.env.STEAM_KEY + "&steamid=" + steamid + "&relationship=friend")
 
@@ -75,7 +77,7 @@ router.get('/recent', authMiddleware, async (req, res) => {
             message: "User not found!"
         })
     }
-
+    console.log(process.env.STEAM_KEY)
     const steamid = user.steamid
     try {
         const result = await fetch("http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=" + process.env.STEAM_KEY + "&steamid=" + steamid)

@@ -54,7 +54,7 @@ export default function Home() {
     const navigate = useNavigate()
 
     //https://xylium.onrender.com
-    //https://xylium.onrender.com
+    //http://localhost:8080
     useEffect(() => {
         try {
             axios.all([ 
