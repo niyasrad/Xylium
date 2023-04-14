@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { default: axios } = require('axios');
 const User = require('../models/user')
 const authMiddleware = require('../utils/auth')
 
@@ -12,12 +13,11 @@ router.get('/person/:steamid?', authMiddleware, async (req, res) => {
         })
     }
     const steamid = req.params.steamid ? req.params.steamid : user.steamid;
-    console.log(process.env.STEAM_KEY)
     
     try {
-        const result = await fetch("https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+ process.env.STEAM_KEY +"&steamids=" + steamid)
+        const result = await axios.get("https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+ process.env.STEAM_KEY +"&steamids=" + steamid)
 
-        const data = await result.json()
+        const data = await result.data
 
         if (result.status !== 200 || data.response.players.length === 0) {
             return res.status(400).json({
@@ -47,11 +47,10 @@ router.get('/friends', authMiddleware, async (req, res) => {
     }
 
     const steamid = user.steamid
-    console.log(process.env.STEAM_KEY)
     try {
-        const result = await fetch("https://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=" + process.env.STEAM_KEY + "&steamid=" + steamid + "&relationship=friend")
+        const result = await axios.get("https://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=" + process.env.STEAM_KEY + "&steamid=" + steamid + "&relationship=friend")
 
-        const friends = await result.json()
+        const friends = result.data
 
         if (result.status !== 200 || !friends.friendslist || !friends.friendslist.friends) {
             return res.status(400).json({
@@ -79,12 +78,11 @@ router.get('/recent', authMiddleware, async (req, res) => {
             message: "User not found!"
         })
     }
-    console.log(process.env.STEAM_KEY)
     const steamid = user.steamid
     try {
-        const result = await fetch("http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=" + process.env.STEAM_KEY + "&steamid=" + steamid)
+        const result = await axios.get("http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=" + process.env.STEAM_KEY + "&steamid=" + steamid)
 
-        const games = await result.json()
+        const games = await result.data
 
         if (result.status !== 200 || !games.response || !games.response.games) {
             return res.status(400).json({
