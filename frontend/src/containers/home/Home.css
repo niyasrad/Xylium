@@ -16,18 +16,36 @@
 
 
 .home__topbar {
-    width: 100%;
+    width: 90%;
     display: flex;
     padding-top: 20px;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
+    padding-bottom: 50px;
 }
 .home__logo {
     font-size: 32px;
 }
+.home__navigation {
+    background: linear-gradient(180deg, #CC208E 0%, #6713D2 100%);
+    box-shadow: 0px 4px 59px -10px #B3005E;
+    border-radius: 12px;
+    height: 60px;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 30px;
+    padding-right: 30px;
+    align-items: center;
+    box-sizing: border-box;
+}
+.home__nav-buttons {
+    font-size: 22px;
+    display: flex;
+    gap: 100px;
+}
 .home__welcome {
     font-size: 22px;
-    color: var(--xylium-color-darkpink);
     display: flex;
     align-items: center;
     gap: 15px;
@@ -35,38 +53,59 @@
 .home__signout {
     width: 32px;
     height: 32px;
-    color: var(--xylium-color-pink);
 }
 
 .home__main {
     width: 100%;
     background: linear-gradient(359.68deg, #000000 0.26%, #1B2025 99.71%);
     border-radius: 30px;
+    box-shadow: 0px 4px 56px -23px #E90064;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    align-items: center;
+    padding: 50px;
+    gap: 50px;
 }
 
+
+.home__first {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.home__profile {
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.home__username {
+    font-size: 32px;
+}
+.home__steamid {
+    font-size: 20px;
+    color: var(--xylium-color-darkpink);
+}
 .home__type-writer {
-    padding-top: 100px;
+    padding-top: 20px;
     box-sizing: border-box;
     max-width: 80%;
     text-align: center;
     min-height: 300px;
     font-weight: 500;
-    font-size: 48px;
-    line-height: 76px;
-    text-align: center;
-    letter-spacing: 0.265em;   
+    font-size: 26px;
+    line-height: 36px;
+    text-align: start;
+    letter-spacing: 0.165em;   
 }
 .home__type-writed-text {
     font-weight: 500;
-    font-size: 48px;
-    line-height: 76px;
-    text-align: center;
-    letter-spacing: 0.245em;
+    font-size: 26px;
+    line-height: 36px;
+    text-align: start;
+    letter-spacing: 0.165em;   
     color: #E90064;
 }
 .home__type-bg {
@@ -78,38 +117,83 @@
 }
 
 
-.home__options{
-    width: 100%;
+.home__friends {
+    width: 50%;
+    min-height: 500px;
+    font-size: 24px;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 50px
+    flex-direction: column;
+    gap: 30px;
 }
-.home__option-cards {
+
+.home__friends-list {
+    background: linear-gradient(359.68deg, #000000 0.26%, #1B2025 99.71%);
+    box-shadow: 0px 0px 34px -6px rgba(233, 0, 100, 0.6);
+    border-radius: 22px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 30px;
     display: flex;
     flex-direction: column;
     gap: 50px;
 }
-.home__options-text {
-    font-size: 22px;
-    max-width: 250px;
-    text-align: center;
-}
 
+.home__recent {
+    width: 100%;
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.home__recent-list {
+    width: 100%;
+    background: linear-gradient(359.68deg, #000000 0.26%, #1B2025 99.71%);
+    box-shadow: 0px 0px 15px -1px #B3005E;
+    border-radius: 15px;
+    min-height: 250px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    align-items: center;
+    padding: 30px;
+    box-sizing: border-box;
+}
+.home__recent-game {
+    overflow: hidden;
+    border-radius: 20px;
+    position: relative;
+    width: auto;
+    height: 130px;   
+}
+.home__recent-gamebg {
+    background-image: var(--xylium-button);
+    background-blend-mode: darken;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    opacity: 0.9;
+    width: 100%;
+    font-weight: 600;
+    height: 100%;
+    top: 0;
+    right: 0;
+    transition: all 0.3s ease-in-out;
+}
+.home__recent-gamebg:hover {
+    opacity: 0;
+}
+.home__recent-game img {
+    width: 100%;
+    height: 100%;
+}
 
 @media only screen and (max-width: 1500px) {
     .home__content {
         width: 80vw;
         max-width: 80vw;
-    }
-    .home__type-writer {
-        padding-top: 50px;
-        font-size: 38px;
-        line-height: 56px;   
-    }
-    .home__type-writed-text {
-        font-size: 38px;
-        line-height: 56px;
     }
 }
 @media only screen and (max-width: 1300px) {
@@ -117,16 +201,25 @@
         width: 90vw;
         max-width: 90vw;
     }
-    .home__type-writer {
-        font-size: 28px;
-        max-width: 90%;
-        line-height: 56px;   
+    .home__main {
+        padding: 30px;
     }
-    .home__type-writed-text {
-        font-size: 28px;
-        line-height: 56px;
-    }
-    .home__options{
+    .home__first {
         flex-direction: column;
+    }
+    .home__profile {
+        max-width: 100%;
+    }
+    .home__type-writer {
+        max-width: 100%;
+        min-height: 300px;
+    }
+    .home__friends {
+        width: 100%;
+        min-height: 200px;
+    }
+    .home__navigation {
+        display: none;
+        
     }
 }

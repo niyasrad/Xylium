@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from 'react'
+import React, { createContext, Dispatch, SetStateAction, useContext, useEffect, useLayoutEffect, useState } from 'react'
 import './AppWrapper.css'
 
 
@@ -7,7 +7,8 @@ interface AppWrapperContextType {
   isLoggedIn : boolean,
   globalUsername: string,
   setIsLoggedIn? : Dispatch<SetStateAction<boolean>>,
-  setGlobalUsername?: Dispatch<SetStateAction<string>>
+  setGlobalUsername?: Dispatch<SetStateAction<string>>,
+  handleSignOut?: () => void;
 }
 
 const defaultValue = {
@@ -24,8 +25,21 @@ function AppWrapper({ children }: { children: React.ReactNode }) {
 
   const [isLoggedIn, setIsLoggedIn] = useState(defaultValue.isLoggedIn)
   const [globalUsername, setGlobalUsername] = useState(defaultValue.globalUsername)
-  
-  useEffect(() => {
+
+
+  const ResetAppContext = () => {
+    setGlobalUsername(defaultValue.globalUsername)
+    setIsLoggedIn(defaultValue.isLoggedIn)
+  }
+
+  const handleSignOut = () => {
+
+    localStorage.removeItem("accessToken")
+    axios.defaults.headers.common['Authorization'] = ''
+    ResetAppContext()
+
+  }
+  useLayoutEffect(() => {
 
     const token = localStorage.getItem("accessToken")
     if (!token) return
@@ -50,7 +64,8 @@ function AppWrapper({ children }: { children: React.ReactNode }) {
         isLoggedIn,
         globalUsername,
         setIsLoggedIn,
-        setGlobalUsername
+        setGlobalUsername,
+        handleSignOut
       }}
     >
       {

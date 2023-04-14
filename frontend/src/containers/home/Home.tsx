@@ -5,6 +5,7 @@ import { Typewriter } from 'react-simple-typewriter'
 import './Home.css'
 import Steambar from "../../components/steambar/Steambar";
 import Button from "../../components/button/Button";
+import { useNavigate } from "react-router";
 
 
 function unixTimeToDays(unixTime: number) {
@@ -43,19 +44,32 @@ function getTimeCreated(response: any) {
 
 export default function Home() {
     
-    const { globalUsername, isLoggedIn } = useAppWrapperContext()
+    const { globalUsername, isLoggedIn, handleSignOut } = useAppWrapperContext()
     const [loading, setLoading] = useState(true)
-    const [result, setResult] = useState({}) 
+    const [friends, setFriends] = useState([])
+    const [recentGames, setRecentGames] = useState([])
+    const [result, setResult] = useState({
+        steamid: "Loading.."
+    }) 
+    const navigate = useNavigate()
 
 
     useEffect(() => {
         try {
-            axios.get('http://localhost:8080/user/')
-            .then((res) => setResult(res.data))
-            .catch((err) => console.log(err))
+            axios.all([ 
+                axios.get('http://localhost:8080/user/person'),
+                axios.get('http://localhost:8080/user/friends'), 
+                axios.get('http://localhost:8080/user/recent')
+            ])
+            .then(axios.spread((res1, res2, res3) => {
+                setResult(res1.data)
+                setFriends(res2.data)
+                setRecentGames(res3.data)
+            }))
+            .catch(() => navigate('/'))
             .finally(() => setLoading(false))
         } catch (err) {
-            console.log(err)
+             navigate('/')
         }
     }, [])
 
@@ -75,36 +89,69 @@ export default function Home() {
     }
     return(
         <div className="home">
-            <div className="home__content">
-                <div className="home__topbar">
-                    <span className="home__logo link">Xylium</span>
+            <div className="home__topbar">
+                <span className="home__logo link">Xylium</span>
+                <div className="home__navigation">
+                    <div className="home__nav-buttons">
+                        <span className="home__nav-button">XYCARD</span>
+                        <span className="home__nav-button">DBOARD</span>
+                    </div>       
                     <span className="home__welcome">Welcome, {globalUsername}
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="home__signout link">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
-                    </svg>
+                        <svg 
+                            onClick={() => {
+                                handleSignOut!()
+                                navigate('/login')
+                            }} 
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="home__signout link">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                        </svg>
                     </span>
                 </div>
+            </div>
+            <div className="home__content">
+                
                 <div className="home__main">
-                    <div className="home__type-writer">
-                        <span className="home__type-bg">Your Steam Was&nbsp;</span>
-                        <span className="home__type-writed-text link">
-                            <Typewriter 
-                                words={words}
-                                loop={0}
-                                cursor
-                                cursorStyle='_'
-                                typeSpeed={50}
-                                deleteSpeed={10}
-                                delaySpeed={3000}
-                            />
-                        </span>
+                    <div className="home__first">
+                        <div className="home__profile">
+                            <span className="home__username">{globalUsername}</span>
+                            <span className="home__steamid">{result.steamid}</span>
+                            <div className="home__type-writer">
+                                <span className="home__type-bg">Your Steam Was&nbsp;</span>
+                                <span className="home__type-writed-text link">
+                                    <Typewriter 
+                                        words={words}
+                                        loop={0}
+                                        cursor
+                                        cursorStyle='_'
+                                        typeSpeed={100}
+                                        deleteSpeed={110}
+                                        delaySpeed={3000}
+                                    />
+                                </span>
+                            </div>
+                        </div>
+                        <div className="home__friends">
+                            Friends
+                            <div className="home__friends-list">
+                                {
+                                    friends.map((friend) => (
+                                        <Steambar friend={friend} />
+                                    ))
+                                }
+                            </div>
+                        </div>   
                     </div>
-                    <div className="home__options">
-                        <Steambar holder={result}/>
-                        <div className="home__option-cards">
-                            <span className="home__options-text">Navigate to one of the sections for fun!</span>
-                            <Button text="DBoard" />
-                            <Button text="XyCard"/>
+                    <div className="home__recent">
+                        Recently Played
+                        <div className="home__recent-list">
+                            {
+                                recentGames.map((game: any) => (
+                                    <div className="home__recent-game">
+                                        <img src={"https://cdn.akamai.steamstatic.com/steam/apps/" + game.appid + "/header.jpg"}  alt="recently played" />
+                                        <div className="home__recent-gamebg">{game.name}</div>
+                                    </div>  
+                                ))
+                            }
                         </div>
                     </div>
                 </div>
