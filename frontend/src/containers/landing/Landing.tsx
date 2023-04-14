@@ -20,7 +20,7 @@ export default function Landing() {
     }
 
     useEffect(() => {
-        fetch('http://localhost:8080/server')
+        fetch('https://xylium.onrender.com/server')
         .then((res) => console.log(res))
     }, [])
     

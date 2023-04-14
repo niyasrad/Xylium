@@ -53,13 +53,14 @@ export default function Home() {
     }) 
     const navigate = useNavigate()
 
-
+    //https://xylium.onrender.com
+    //http://localhost:8080
     useEffect(() => {
         try {
             axios.all([ 
-                axios.get('http://localhost:8080/user/person'),
-                axios.get('http://localhost:8080/user/friends'), 
-                axios.get('http://localhost:8080/user/recent')
+                axios.get('https://xylium.onrender.com/user/person'),
+                axios.get('https://xylium.onrender.com/user/friends'), 
+                axios.get('https://xylium.onrender.com/user/recent')
             ])
             .then(axios.spread((res1, res2, res3) => {
                 setResult(res1.data)

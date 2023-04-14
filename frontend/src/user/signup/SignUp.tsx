@@ -31,7 +31,7 @@ export default function SignUp() {
             setErrMessage("Please provide with the SteamID")
         }
 
-        axios.post('http://localhost:8080/api/signup', {
+        axios.post('https://xylium.onrender.com/api/signup', {
             username: username,
             password: password,
             steamid: steamID

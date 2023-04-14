@@ -45,7 +45,7 @@ function AppWrapper({ children }: { children: React.ReactNode }) {
     if (!token) return
 
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-    axios.get('http://localhost:8080/api/checkauth')
+    axios.get('https://xylium.onrender.com/api/checkauth')
     .then((res) => {
       setGlobalUsername!(res.data.message ? res.data.message : '')
       setIsLoggedIn(true)
