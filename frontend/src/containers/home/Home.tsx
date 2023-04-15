@@ -4,7 +4,6 @@ import { useAppWrapperContext } from "../../AppWrapper";
 import { Typewriter } from 'react-simple-typewriter'
 import './Home.css'
 import Steambar from "../../components/steambar/Steambar";
-import Button from "../../components/button/Button";
 import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router";
 
@@ -167,7 +166,7 @@ export default function Home() {
                                         cursorStyle='_'
                                         typeSpeed={100}
                                         deleteSpeed={110}
-                                        delaySpeed={3000}
+                                        delaySpeed={5000}
                                     />
                                 </span>
                             </div>
