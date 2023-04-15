@@ -5,6 +5,7 @@ import { Typewriter } from 'react-simple-typewriter'
 import './Home.css'
 import Steambar from "../../components/steambar/Steambar";
 import Button from "../../components/button/Button";
+import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router";
 
 
@@ -45,6 +46,7 @@ function getTimeCreated(response: any) {
 export default function Home() {
     
     const { globalUsername, isLoggedIn, handleSignOut } = useAppWrapperContext()
+    const [mobileNavbar, setMobileNavbar] = useState(false)
     const [loading, setLoading] = useState(true)
     const [friends, setFriends] = useState([])
     const [recentGames, setRecentGames] = useState([])
@@ -108,10 +110,49 @@ export default function Home() {
                         </svg>
                     </span>
                 </div>
+                <svg 
+                    onClick={() => {
+                        setMobileNavbar(!mobileNavbar)
+                    }} 
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="home__signout home__signout--mobile link">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25" />
+                </svg>
             </div>
+            <AnimatePresence>
+                {
+                    mobileNavbar &&
+                    <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto'}}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="home__mobile-motion"
+                        
+                    >   
+                        <div className="home__mobile-nav">
+                            <span className="home__nav-button">XYCARD</span>
+                            <span className="home__nav-button">DBOARD</span>
+                            <div className="home__nav-button"
+                                onClick={() => {
+                                    handleSignOut!()
+                                    navigate('/login')
+                                }}     
+                            >
+                                Sign Out
+                                <svg 
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="home__signout link">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                                </svg>
+                            </div>
+                        </div>
+                    </motion.div>
+                }
+            </AnimatePresence>
             <div className="home__content">
-                
-                <div className="home__main">
+                <motion.div 
+                    className="home__main"
+                    initial={{ opacity: 0 }} 
+                    whileInView={{opacity: 1}} 
+                >
                     <div className="home__first">
                         <div className="home__profile">
                             <span className="home__username">{globalUsername}</span>
@@ -132,7 +173,12 @@ export default function Home() {
                             </div>
                         </div>
                         <div className="home__friends">
-                            Friends
+                            <div className="home__category">
+                                <span>Friends</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="home__category-svg link">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                                </svg>
+                            </div>
                             <div className="home__friends-list">
                                 {
                                     friends.map((friend) => (
@@ -143,19 +189,24 @@ export default function Home() {
                         </div>   
                     </div>
                     <div className="home__recent">
-                        Recently Played
+                        <div className="home__category">
+                            <span>Recently Played</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="home__category-svg link">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                            </svg>
+                        </div>
                         <div className="home__recent-list">
                             {
                                 recentGames.map((game: any) => (
                                     <div className="home__recent-game">
-                                        <img src={"https://cdn.akamai.steamstatic.com/steam/apps/" + game.appid + "/header.jpg"}  alt="recently played" />
+                                        <img src={"https://cdn.akamai.steamstatic.com/steam/apps/" + game.appid + "/header.jpg"}  alt={game.name} />
                                         <div className="home__recent-gamebg">{game.name}</div>
                                     </div>  
                                 ))
                             }
                         </div>
                     </div>
-                </div>
+                </motion.div>
             </div>
         </div>
     )
