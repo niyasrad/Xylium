@@ -95,8 +95,8 @@ export default function Home() {
                 <span className="home__logo link">Xylium</span>
                 <div className="home__navigation">
                     <div className="home__nav-buttons">
-                        <span className="home__nav-button">XYCARD</span>
-                        <span className="home__nav-button">DBOARD</span>
+                        <span className="home__nav-button link">XYCARD</span>
+                        <span className="home__nav-button link">DBOARD</span>
                     </div>       
                     <span className="home__welcome">Welcome, {globalUsername}
                         <svg 
@@ -109,13 +109,23 @@ export default function Home() {
                         </svg>
                     </span>
                 </div>
-                <svg 
-                    onClick={() => {
-                        setMobileNavbar(!mobileNavbar)
-                    }} 
-                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="home__signout home__signout--mobile link">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25" />
-                </svg>
+                <div className="home__navigation-options">
+                    <svg 
+                        onClick={() => {
+                            handleSignOut!()
+                            navigate('/login')
+                        }} 
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="home__signout--mobile link">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                    </svg>
+                    <svg 
+                        onClick={() => {
+                            setMobileNavbar(!mobileNavbar)
+                        }} 
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="home__signout home__signout--mobile link">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25" />
+                    </svg>
+                </div>
             </div>
             <AnimatePresence>
                 {
@@ -130,18 +140,6 @@ export default function Home() {
                         <div className="home__mobile-nav">
                             <span className="home__nav-button">XYCARD</span>
                             <span className="home__nav-button">DBOARD</span>
-                            <div className="home__nav-button"
-                                onClick={() => {
-                                    handleSignOut!()
-                                    navigate('/login')
-                                }}     
-                            >
-                                Sign Out
-                                <svg 
-                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="home__signout link">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
-                                </svg>
-                            </div>
                         </div>
                     </motion.div>
                 }
