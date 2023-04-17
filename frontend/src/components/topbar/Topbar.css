@@ -1,0 +1,87 @@
+.topbar {
+    width: 90%;
+    display: flex;
+    padding-top: 20px;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 50px;
+}
+.topbar__logo {
+    font-size: 32px;
+}
+.topbar__navigation {
+    background: linear-gradient(90deg, #CC208E 0%, #6713D2 100%);
+    background-size: 200% auto;
+    box-shadow: 0px 4px 59px -10px #B3005E;
+    border-radius: 12px;
+    height: 60px;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 30px;
+    padding-right: 30px;
+    align-items: center;
+    box-sizing: border-box;
+    transition: 0.3s all ease-in-out;
+}
+.topbar__navigation:hover {
+    background-position: center right;
+}
+.topbar__nav-buttons {
+    font-size: 22px;
+    display: flex;
+    gap: 100px;
+}
+.topbar__nav-button {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    font-weight: 600;
+}
+.topbar__welcome {
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.topbar__navigation-options {
+    display: flex;
+    gap: 20px;
+}
+.topbar__signout {
+    width: 32px;
+    height: 32px;
+}
+.topbar__signout--mobile {
+    width: 32px;
+    height: 32px;
+    display: none;
+}
+@media only screen and (max-width: 1300px) {
+    .topbar__navigation {
+        display: none;
+    }
+    .topbar__signout--mobile {
+        display: block;
+    }
+    .topbar__mobile-motion {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .topbar__mobile-nav {
+        width: 80%;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        margin-bottom: 50px;
+        box-sizing: border-box;
+        gap: 50px;
+        font-size: 24px;
+        background-image: var(--xylium-button);
+    }
+    
+}

@@ -6,6 +6,7 @@ import './Home.css'
 import Steambar from "../../components/steambar/Steambar";
 import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router";
+import Topbar from "../../components/topbar/Topbar";
 
 
 function unixTimeToDays(unixTime: number) {
@@ -91,59 +92,7 @@ export default function Home() {
     }
     return(
         <div className="home">
-            <div className="home__topbar">
-                <span className="home__logo link">Xylium</span>
-                <div className="home__navigation">
-                    <div className="home__nav-buttons">
-                        <span className="home__nav-button link">XYCARD</span>
-                        <span className="home__nav-button link">DBOARD</span>
-                    </div>       
-                    <span className="home__welcome">Welcome, {globalUsername}
-                        <svg 
-                            onClick={() => {
-                                handleSignOut!()
-                                navigate('/login')
-                            }} 
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="home__signout link">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
-                        </svg>
-                    </span>
-                </div>
-                <div className="home__navigation-options">
-                    <svg 
-                        onClick={() => {
-                            handleSignOut!()
-                            navigate('/login')
-                        }} 
-                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="home__signout--mobile link">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
-                    </svg>
-                    <svg 
-                        onClick={() => {
-                            setMobileNavbar(!mobileNavbar)
-                        }} 
-                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="home__signout home__signout--mobile link">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25" />
-                    </svg>
-                </div>
-            </div>
-            <AnimatePresence>
-                {
-                    mobileNavbar &&
-                    <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto'}}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="home__mobile-motion"
-                        
-                    >   
-                        <div className="home__mobile-nav">
-                            <span className="home__nav-button">XYCARD</span>
-                            <span className="home__nav-button">DBOARD</span>
-                        </div>
-                    </motion.div>
-                }
-            </AnimatePresence>
+            <Topbar />
             <div className="home__content">
                 <motion.div 
                     className="home__main"
