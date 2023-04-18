@@ -43,7 +43,7 @@ export default function Topbar() {
                         onClick={() => {
                             setMobileNavbar(!mobileNavbar)
                         }} 
-                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="home__signout home__signout--mobile link">
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="topbar__signout topbar__signout--mobile link">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25" />
                     </svg>
                 </div>
@@ -55,7 +55,7 @@ export default function Topbar() {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto'}}
                         exit={{ opacity: 0, height: 0 }}
-                        className="home__mobile-motion"
+                        className="topbar__mobile-motion"
                         
                     >   
                         <div className="topbar__mobile-nav">

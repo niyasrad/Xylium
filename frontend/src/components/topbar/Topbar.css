@@ -9,6 +9,9 @@
 .topbar__logo {
     font-size: 32px;
 }
+.topbar__mobile-nav {
+    display: none;
+}
 .topbar__navigation {
     background: linear-gradient(90deg, #CC208E 0%, #6713D2 100%);
     background-size: 200% auto;

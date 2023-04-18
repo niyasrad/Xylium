@@ -15,66 +15,6 @@
 }
 
 
-.home__topbar {
-    width: 90%;
-    display: flex;
-    padding-top: 20px;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 50px;
-}
-.home__logo {
-    font-size: 32px;
-}
-.home__navigation {
-    background: linear-gradient(90deg, #CC208E 0%, #6713D2 100%);
-    background-size: 200% auto;
-    box-shadow: 0px 4px 59px -10px #B3005E;
-    border-radius: 12px;
-    height: 60px;
-    width: 80%;
-    display: flex;
-    justify-content: space-between;
-    padding-left: 30px;
-    padding-right: 30px;
-    align-items: center;
-    box-sizing: border-box;
-    transition: 0.3s all ease-in-out;
-}
-.home__navigation:hover {
-    background-position: center right;
-}
-.home__nav-buttons {
-    font-size: 22px;
-    display: flex;
-    gap: 100px;
-}
-.home__nav-button {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    font-weight: 600;
-}
-.home__welcome {
-    font-size: 22px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-.home__navigation-options {
-    display: flex;
-    gap: 20px;
-}
-.home__signout {
-    width: 32px;
-    height: 32px;
-}
-.home__signout--mobile {
-    width: 32px;
-    height: 32px;
-    display: none;
-}
-
 .home__main {
     width: 100%;
     background: linear-gradient(359.68deg, #000000 0.26%, #1B2025 99.71%);
