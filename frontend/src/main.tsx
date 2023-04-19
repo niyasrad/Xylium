@@ -12,6 +12,7 @@ import SignUp from './user/signup/SignUp'
 import AnimatedCursor from "react-animated-cursor"
 import AppWrapper from './AppWrapper'
 import Home from './containers/home/Home'
+import Xycard from './containers/xycard/Xycard'
 
 
 const router = createBrowserRouter([
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: '/home',
     element: <Home />
+  },
+  {
+    path: '/:user/xycard',
+    element: <Xycard />
   }
 ])
 

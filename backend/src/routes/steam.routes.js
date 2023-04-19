@@ -89,8 +89,12 @@ router.get('/recent', authMiddleware, async (req, res) => {
                 message: "Unable to retrieve recently played games!"
             })
         }
-        
-        return res.status(200).json(games.response.games)
+        let total2weekplay = 0
+        for (let game of games.response.games) {
+            total2weekplay += game.playtime_2weeks;
+        }
+
+        return res.status(200).json({games: games.response.games, total2weekplay: total2weekplay})
     
     } catch (err) {
         console.error(err);

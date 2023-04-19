@@ -1,0 +1,111 @@
+.xycard {
+    width: 100vw;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.xycard__content {
+    width: 70%;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    padding: 100px;
+    padding-top: 50px;
+    box-sizing: border-box;
+    justify-content: space-between;
+    background: linear-gradient(359.68deg, #000000 0.26%, #1B2025 99.71%);
+    box-shadow: 0px 4px 38px -17px #FFFFFF;
+    border-radius: 40px;
+    min-height: 50vh;
+}
+
+.xycard__games {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.xycard__top-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.xycard__heading {
+    font-size: 32px;
+}
+
+.xycard__information {
+    display: flex;
+    justify-content: space-between;
+}
+
+.xycard__games-list {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.xycard__recent-game {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+.xycard__recent-image {
+    height: auto;
+    width: 320px;
+    overflow: hidden;
+    border-radius: 20px;
+}
+.xycard__hours-put {
+    letter-spacing: 0.22em;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--xylium-color-violentpink);
+}
+
+
+.xycard__diagnosis {
+    max-width: 350px;
+    padding: 20px;
+    text-align: end;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-sizing: border-box;
+}
+.xycard__dia-intro {
+    font-size: 22px;
+    color: var(--xylium-color-darkpink);
+}
+.xycard__dia-timings {
+    font-size: 24px;
+    letter-spacing: 0.22em;
+    color: var(--xylium-color-violentpink);
+}
+
+@media only screen and (max-width: 1300px) {
+    .xycard__content {
+        width: 90%;
+        padding: 50px;
+    }
+}
+
+@media only screen and (max-width: 990px) {
+    .xycard__top-info {
+        display: block;
+    }
+    .xycard__information {
+        flex-direction: column;
+        gap: 45px;
+    }
+    .xycard__games-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .xycard__diagnosis {
+        text-align: start;
+    }
+}

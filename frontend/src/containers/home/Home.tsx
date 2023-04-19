@@ -67,7 +67,7 @@ export default function Home() {
             .then(axios.spread((res1, res2, res3) => {
                 setResult(res1.data)
                 setFriends(res2.data)
-                setRecentGames(res3.data)
+                setRecentGames(res3.data.games)
             }))
             .catch(() => navigate('/'))
             .finally(() => setLoading(false))
