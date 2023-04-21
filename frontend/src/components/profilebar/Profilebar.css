@@ -1,14 +1,13 @@
 .pbar {
     max-height: 200px;
+    max-width: 280px;
     display: flex;
     align-items: center;
 }
 .pbar__name {
     background-image: var(--xylium-button);
     height: 60px;
-    width: 100%;
-    max-width: 250px;
-    min-width: 175px;
+    min-width: 200px;
     display: flex;
     justify-content: start;
     align-items: center;
@@ -18,7 +17,7 @@
     box-sizing: border-box;
 }
 .pbar__image {
-    height: 120px;
+    height: 100px;
     position: relative;
     border-radius: 20px;
 }
@@ -39,4 +38,14 @@
 }
 .pbar__indicator--online {
     background-color: greenyellow;
+}
+
+
+@media only screen and (max-width: 990px) {
+    .pbar__name {
+        font-size: 20px;
+        min-width: 180px;
+        max-width: 180px;
+        text-overflow: ellipsis;
+    }
 }

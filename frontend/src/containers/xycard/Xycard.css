@@ -89,23 +89,27 @@
 @media only screen and (max-width: 1300px) {
     .xycard__content {
         width: 90%;
-        padding: 50px;
     }
 }
-
 @media only screen and (max-width: 990px) {
+    .xycard__content {
+        padding: 50px;
+    }
     .xycard__top-info {
-        display: block;
+        align-items: center;
+        flex-direction: column;
+        gap: 30px;
     }
     .xycard__information {
         flex-direction: column;
-        gap: 45px;
+        gap: 20px;
+        align-items: center;
     }
-    .xycard__games-list {
-        flex-direction: row;
-        flex-wrap: wrap;
+    .xycard__recent-image {
+        width: 280px;
     }
     .xycard__diagnosis {
-        text-align: start;
+        max-width: unset;
+        text-align: center;
     }
 }

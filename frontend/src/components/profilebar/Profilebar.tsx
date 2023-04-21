@@ -27,7 +27,7 @@ export default function Profilebar({ username }: { username: string}) {
                 {userData.personaname}
             </div>
             <div className="pbar__image">
-                <img src={userData.avatarfull} alt="profile picture"/>
+                <img src={!userData.avatarfull || userData.avatarfull === '' ? 'https://cdn.discordapp.com/attachments/946407954180108328/1098973545431826472/sport_184_184_px.png' : userData.avatarfull} alt="profile picture"/>
                 <div className={`pbar__indicator ${userData.personastate === 0 ? 'pbar__indicator--away': 'pbar__indicator--online'}`}></div>
             </div>
         </div>

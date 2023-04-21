@@ -41,9 +41,9 @@ export default function Xycard() {
                     <div className="xycard__information">
                         <div className="xycard__games-list">
                         {
-                            userData.games.map((game: any) => (
+                            userData.games.slice(0,2).map((game: any) => (
                                 <div className="xycard__recent-game">
-                                    <img className="xycard__recent-image" src={"https://cdn.akamai.steamstatic.com/steam/apps/" + game.appid + "/header.jpg"}  alt={game.name} />
+                                    <img className="xycard__recent-image" src={game.img_icon_url === "" ? "https://cdn.discordapp.com/attachments/946407954180108328/1098972496453173389/sport.png" : "https://cdn.akamai.steamstatic.com/steam/apps/" + game.appid + "/header.jpg"}  alt={game.name} />
                                     <span className="xycard__hours-put">{game.playtime_2weeks} Minutes</span>
                                 </div>
                             ))
