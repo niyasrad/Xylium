@@ -60,7 +60,7 @@ export default function Home() {
     useEffect(() => {
         try {
             axios.all([ 
-                axios.get('https://xylium.onrender.com/user/person'),
+                axios.get('https://xylium.onrender.com/user/person/me'),
                 axios.get('https://xylium.onrender.com/user/friends'), 
                 axios.get('https://xylium.onrender.com/user/recent')
             ])

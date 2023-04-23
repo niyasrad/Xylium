@@ -28,6 +28,10 @@ html {
     scroll-behavior: smooth;
 }
 
+body {
+    overscroll-behavior: none;
+}
+
 a {
     text-decoration: none;
     color: white;

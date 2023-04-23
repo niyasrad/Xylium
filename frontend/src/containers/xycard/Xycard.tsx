@@ -9,14 +9,14 @@ import './Xycard.css'
 
 export default function Xycard() {
 
-    const { user }= useParams()
+    const { user } = useParams()
     const [userData, setUserData] = useState({
         games: [],
         total2weekplay: 0
     })
 
     useEffect(() => {
-        axios.get('https://xylium.onrender.com/user/recent')
+        axios.get(`https://xylium.onrender.com/user/recent/${user}`)
         .then((res) => {
             setUserData(res.data)
         })

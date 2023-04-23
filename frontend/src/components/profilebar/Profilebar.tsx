@@ -12,7 +12,7 @@ export default function Profilebar({ username }: { username: string}) {
 
 
     useEffect(() => {
-        axios.get('https://xylium.onrender.com/user/person/')
+        axios.get(`https://xylium.onrender.com/user/person/username/${username}`)
         .then((res) => {
             setUserData(res.data)
         })

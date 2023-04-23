@@ -3,16 +3,17 @@ const { default: axios } = require('axios');
 const User = require('../models/user')
 const authMiddleware = require('../utils/auth')
 
-router.get('/person/:steamid?', authMiddleware, async (req, res) => {
 
+// Endpoint used to get profile data using steamID or the person themselves
+router.get('/person/:method/:steamid?', async (req, res) => {
 
-    const user = await User.findOne({ username: req.username })
+    const user = await User.findOne({ username: req.params.method === "username" ? req.params.steamid : req.username })
     if (!user) {
         return res.status(400).json({
             message: "User not found!"
         })
     }
-    const steamid = req.params.steamid ? req.params.steamid : user.steamid;
+    const steamid = req.params.method === "steamid" ? req.params.steamid : user.steamid;
     
     try {
         const result = await axios.get("https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+ process.env.STEAM_KEY +"&steamids=" + steamid)
@@ -69,9 +70,10 @@ router.get('/friends', authMiddleware, async (req, res) => {
     }
 })
 
-router.get('/recent', authMiddleware, async (req, res) => {
+// Endpoint used to get recent played by username or by themselves
+router.get('/recent/:username?', async (req, res) => {
 
-    const user = await User.findOne({ username: req.username })
+    const user = await User.findOne({ username: req.params.username ? req.params.username : req.username })
 
     if (!user) {
         return res.status(400).json({
