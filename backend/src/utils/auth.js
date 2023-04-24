@@ -21,4 +21,12 @@ const authMiddleWare = (req, res, next) => {
     next()
 }
 
-module.exports = authMiddleWare
+const userAttach = (req, res, next) => {
+    const token = req.headers['authorization'] ? req.headers['authorization'].split(' ')[1]: null
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        req.username = decoded.username; 
+    })
+    next()
+}
+
+module.exports = { authMiddleWare, userAttach };

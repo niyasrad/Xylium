@@ -13,9 +13,6 @@
 
     font-family: 'Jura', sans-serif;
     color: white;
-    background-image: var(--xylium-bg);
-    background-attachment: fixed;
-    background-repeat: no-repeat;
 }
 
 * {
@@ -26,6 +23,9 @@
 
 html {
     scroll-behavior: smooth;
+    background-image: var(--xylium-bg);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
 }
 
 body {

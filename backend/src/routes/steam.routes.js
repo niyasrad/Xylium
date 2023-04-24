@@ -1,11 +1,11 @@
 const router = require('express').Router();
 const { default: axios } = require('axios');
 const User = require('../models/user')
-const authMiddleware = require('../utils/auth')
+const { authMiddleWare, userAttach } = require('../utils/auth');
 
 
 // Endpoint used to get profile data using steamID or the person themselves
-router.get('/person/:method/:steamid?', async (req, res) => {
+router.get('/person/:method/:steamid?', userAttach, async (req, res) => {
 
     const user = await User.findOne({ username: req.params.method === "username" ? req.params.steamid : req.username })
     if (!user) {
@@ -37,7 +37,7 @@ router.get('/person/:method/:steamid?', async (req, res) => {
     
 })
 
-router.get('/friends', authMiddleware, async (req, res) => {
+router.get('/friends', authMiddleWare, async (req, res) => {
 
     const user = await User.findOne({ username: req.username })
 
@@ -71,7 +71,7 @@ router.get('/friends', authMiddleware, async (req, res) => {
 })
 
 // Endpoint used to get recent played by username or by themselves
-router.get('/recent/:username?', async (req, res) => {
+router.get('/recent/:username?', userAttach, async (req, res) => {
 
     const user = await User.findOne({ username: req.params.username ? req.params.username : req.username })
 
