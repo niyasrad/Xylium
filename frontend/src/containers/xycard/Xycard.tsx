@@ -1,14 +1,17 @@
 import axios from "axios";
 import { motion } from "framer-motion";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { exportComponentAsPNG } from "react-component-export-image";
 import { useParams } from "react-router";
+import Button from "../../components/button/Button";
 import Profilebar from "../../components/profilebar/Profilebar";
 import Topbar from "../../components/topbar/Topbar";
+import Download from "../download/Download";
 import './Xycard.css'
-
 
 export default function Xycard() {
 
+    const xycardRef = useRef<any>()
     const { user } = useParams()
     const [userData, setUserData] = useState({
         games: [],
@@ -58,6 +61,11 @@ export default function Xycard() {
                     </div>
                 </div>
             </motion.div>
+            <div className="xycard__options">
+                <Button text="Download" onClick={() => exportComponentAsPNG(xycardRef, {'fileName' : `XYCARD__${user}`})}/>
+                <Button text="Share Card" onClick={() => navigator.clipboard.writeText(`https://xylium.vercel.app/${user}/xycard`)} />
+            </div>
+            <Download ref={xycardRef}/>
         </div>
     )
 }

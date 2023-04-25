@@ -86,6 +86,14 @@
     color: var(--xylium-color-violentpink);
 }
 
+.xycard__options {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    box-sizing: border-box;
+    display: flex;
+    gap: 100px;
+}
+
 @media only screen and (max-width: 1300px) {
     .xycard__content {
         width: 90%;
@@ -111,5 +119,10 @@
     .xycard__diagnosis {
         max-width: unset;
         text-align: center;
+    }
+    .xycard__options {
+        padding-top: 50px;
+        flex-direction: column;
+        gap: 50px;
     }
 }

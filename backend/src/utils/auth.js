@@ -24,7 +24,9 @@ const authMiddleWare = (req, res, next) => {
 const userAttach = (req, res, next) => {
     const token = req.headers['authorization'] ? req.headers['authorization'].split(' ')[1]: null
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-        req.username = decoded.username; 
+        if (decoded && decoded.username) {
+            req.username = decoded.username
+        }
     })
     next()
 }
