@@ -7,6 +7,7 @@ import Steambar from "../../components/steambar/Steambar";
 import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router";
 import Topbar from "../../components/topbar/Topbar";
+import Loading from "../../components/loading/Loading";
 
 
 function unixTimeToDays(unixTime: number) {
@@ -85,9 +86,7 @@ export default function Home() {
 
     if (loading || !isLoggedIn) {
         return (
-            <div className='loading'>
-                
-            </div>
+            <Loading />
         )
     }
     return(

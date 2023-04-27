@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { RouterProvider } from 'react-router'
+import { Navigate, RouterProvider } from 'react-router'
 import { createBrowserRouter } from 'react-router-dom'
 import App from './AppWrapper'
 import Landing from './containers/landing/Landing'
@@ -13,6 +13,7 @@ import AnimatedCursor from "react-animated-cursor"
 import AppWrapper from './AppWrapper'
 import Home from './containers/home/Home'
 import Xycard from './containers/xycard/Xycard'
+import NotFound from './containers/NotFound/NotFound'
 
 
 const router = createBrowserRouter([
@@ -35,6 +36,14 @@ const router = createBrowserRouter([
   {
     path: '/:user/xycard',
     element: <Xycard />
+  },
+  {
+    path: '/404',
+    element: <NotFound />
+  },
+  {
+    path: '*',
+    element: <Navigate to="/404" />
   }
 ])
 

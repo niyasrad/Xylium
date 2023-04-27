@@ -2,8 +2,9 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 import { exportComponentAsPNG } from "react-component-export-image";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import Button from "../../components/button/Button";
+import Loading from "../../components/loading/Loading";
 import Profilebar from "../../components/profilebar/Profilebar";
 import Topbar from "../../components/topbar/Topbar";
 import Download from "../download/Download";
@@ -11,6 +12,8 @@ import './Xycard.css'
 
 export default function Xycard() {
 
+    const [loading, setLoading] = useState<boolean>(true)
+    const navigate = useNavigate()
     const xycardRef = useRef<any>()
     const { user } = useParams()
     const [userData, setUserData] = useState({
@@ -22,11 +25,21 @@ export default function Xycard() {
         axios.get(`https://xylium.onrender.com/user/recent/${user}`)
         .then((res) => {
             setUserData(res.data)
+            setLoading(false)
         })
         .catch((err) => {
-            console.log(err)
+            if (err.response.status === 400) {
+                navigate('../404')
+            }
+            console.log(err.response.data.message)
         })
     }, [])
+
+    if (loading) {
+        return (
+            <Loading />
+        )
+    }
 
     return (
         <div className="xycard">
