@@ -76,3 +76,28 @@
     letter-spacing: 0.22em;
     color: var(--xylium-color-violentpink);
 }
+
+
+.download__no-games {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    gap: 10px;
+}
+.download__no-games-logo {
+    max-width: 250px;
+    padding-bottom: 20px;
+}
+.download__no-games-heading {
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--xylium-color-violentpink);
+    text-align: center;
+}
+.download__no-games-desc {
+    font-size: 20px;
+    text-align: center;
+    max-width: 80%;
+}
