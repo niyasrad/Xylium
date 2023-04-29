@@ -8,6 +8,7 @@ import Loading from "../../components/loading/Loading";
 import Profilebar from "../../components/profilebar/Profilebar";
 import Topbar from "../../components/topbar/Topbar";
 import Download from "../download/Download";
+import X from '../../assets/X.svg'
 import './Xycard.css'
 
 export default function Xycard() {
@@ -54,24 +55,47 @@ export default function Xycard() {
                         <span className="xycard__heading">Xylium</span>
                         <Profilebar username={user ? user: 'tester'}/>
                     </div>
-                    <div className="xycard__information">
-                        <div className="xycard__games-list">
-                        {
-                            userData.games.slice(0,2).map((game: any) => (
-                                <div className="xycard__recent-game">
-                                    <img className="xycard__recent-image" src={game.img_icon_url === "" ? "https://cdn.discordapp.com/attachments/946407954180108328/1098972496453173389/sport.png" : "https://cdn.akamai.steamstatic.com/steam/apps/" + game.appid + "/header.jpg"}  alt={game.name} />
-                                    <span className="xycard__hours-put">{game.playtime_2weeks} Minutes</span>
+                    {
+                        userData.games.length > 0 ? (
+                            <div className="xycard__information">
+                                <div className="xycard__games-list">
+                                {
+                                    userData.games.slice(0,2).map((game: any) => (
+                                        <div className="xycard__recent-game">
+                                            <img className="xycard__recent-image" src={game.img_icon_url === "" ? "https://cdn.discordapp.com/attachments/946407954180108328/1098972496453173389/sport.png" : "https://cdn.akamai.steamstatic.com/steam/apps/" + game.appid + "/header.jpg"}  alt={game.name} />
+                                            <span className="xycard__hours-put">{game.playtime_2weeks} Minutes</span>
+                                        </div>
+                                    ))
+                                }
                                 </div>
-                            ))
-                        }
-                        </div>
-                        <div className="xycard__diagnosis">
-                            <span className="xycard__dia-intro">
-                                You played, in the last two weeks  for over,
-                            </span>
-                            <span className="xycard__dia-timings">{userData.total2weekplay} Minutes</span>
-                        </div>
-                    </div>
+                                <div className="xycard__diagnosis">
+                                    <span className="xycard__dia-intro">
+                                        You played, in the last two weeks  for over,
+                                    </span>
+                                    <span className="xycard__dia-timings">{userData.total2weekplay} Minutes</span>
+                                </div>
+                            </div>
+                        ) : (
+                            <div className="xycard__no-games">
+                                <motion.img  
+                                    animate={{
+                                        y: [0, 20, 0, -20, 0],
+                                        scale: [1, 0.8, 1, 0.8, 1],
+                                        rotate: [0, 10, 0, -10, 0]
+                                    }}
+                                    transition={{
+                                        duration: 5.5,
+                                        ease: "linear",
+                                        repeat: Infinity
+                                    }}
+                                    className="xycard__no-games-logo" 
+                                    src={X} alt="Xylium Logo" 
+                                />
+                                <span className="xycard__no-games-heading">Owww.. Nothing to show</span>
+                                <span className="xycard__no-games-desc">Play more to get something here!</span>
+                            </div>
+                        )
+                    }
                 </div>
             </motion.div>
             <div className="xycard__options">

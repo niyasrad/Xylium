@@ -1,5 +1,6 @@
 .xycard {
     width: 100vw;
+    max-width: 100%;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -86,6 +87,32 @@
     color: var(--xylium-color-violentpink);
 }
 
+.xycard__no-games {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    gap: 10px;
+}
+.xycard__no-games-logo {
+    max-width: 250px;
+    padding-bottom: 20px;
+}
+.xycard__no-games-heading {
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--xylium-color-violentpink);
+    text-align: center;
+}
+.xycard__no-games-desc {
+    font-size: 20px;
+    text-align: center;
+    max-width: 80%;
+}
+
+
+
 .xycard__options {
     padding-top: 100px;
     padding-bottom: 100px;
@@ -124,5 +151,9 @@
         padding-top: 50px;
         flex-direction: column;
         gap: 50px;
+    }
+
+    .xycard__no-games-logo {
+        width: 200px;
     }
 }
