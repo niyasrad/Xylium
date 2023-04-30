@@ -86,10 +86,13 @@ router.get('/recent/:username?', userAttach, async (req, res) => {
 
         const games = await result.data
 
-        if (result.status !== 200 || !games.response || !games.response.games) {
+        if (result.status !== 200 || !games.response) {
             return res.status(400).json({
                 message: "Unable to retrieve recently played games!"
             })
+        }
+        if (!games.response.games) {
+            return res.status(200).json({games: [], total2weekplay: 0})
         }
         let total2weekplay = 0
         for (let game of games.response.games) {
