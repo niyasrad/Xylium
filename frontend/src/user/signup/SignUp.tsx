@@ -69,7 +69,7 @@ export default function SignUp() {
                         <motion.input whileFocus={{ scale: 1.1 }} className="sign__field" required type="text" placeholder="Enter Username" onChange={(e) => setUsername(e.target.value)}/>
                     </div>
                     <div className="sign__button">
-                        <motion.input whileFocus={{ scale: 1.1 }} className="sign__field" required type="text" placeholder="Enter Password" onChange={(e) => setPassword(e.target.value)} />
+                        <motion.input whileFocus={{ scale: 1.1 }} className="sign__field" required type="password" placeholder="Enter Password" onChange={(e) => setPassword(e.target.value)} />
                         <div className="sign__field-screen"></div>
                     </div>
                     <div  className="sign__button">
