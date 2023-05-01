@@ -23,6 +23,7 @@
 
 html {
     scroll-behavior: smooth;
+    background-color: black;
     background-image: var(--xylium-bg);
     background-attachment: fixed;
     background-repeat: no-repeat;

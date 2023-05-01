@@ -10,6 +10,7 @@ import Topbar from "../../components/topbar/Topbar";
 import Download from "../download/Download";
 import X from '../../assets/X.svg'
 import './Xycard.css'
+import Nothing from "../../components/nothing/nothing";
 
 export default function Xycard() {
 
@@ -77,22 +78,7 @@ export default function Xycard() {
                             </div>
                         ) : (
                             <div className="xycard__no-games">
-                                <motion.img  
-                                    animate={{
-                                        y: [0, 20, 0, -20, 0],
-                                        scale: [1, 0.8, 1, 0.8, 1],
-                                        rotate: [0, 10, 0, -10, 0]
-                                    }}
-                                    transition={{
-                                        duration: 5.5,
-                                        ease: "linear",
-                                        repeat: Infinity
-                                    }}
-                                    className="xycard__no-games-logo" 
-                                    src={X} alt="Xylium Logo" 
-                                />
-                                <span className="xycard__no-games-heading">Owww.. Nothing to show</span>
-                                <span className="xycard__no-games-desc">Play more to get something here!</span>
+                                <Nothing text="Play more to get something here!"/>
                             </div>
                         )
                     }

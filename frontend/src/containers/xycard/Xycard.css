@@ -95,21 +95,6 @@
     align-items: center;
     gap: 10px;
 }
-.xycard__no-games-logo {
-    max-width: 250px;
-    padding-bottom: 20px;
-}
-.xycard__no-games-heading {
-    font-size: 24px;
-    font-weight: 500;
-    color: var(--xylium-color-violentpink);
-    text-align: center;
-}
-.xycard__no-games-desc {
-    font-size: 20px;
-    text-align: center;
-    max-width: 80%;
-}
 
 
 
@@ -153,7 +138,4 @@
         gap: 50px;
     }
 
-    .xycard__no-games-logo {
-        width: 200px;
-    }
 }
