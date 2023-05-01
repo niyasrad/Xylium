@@ -9,6 +9,7 @@ import X from '../../assets/X.svg'
 import { useNavigate } from "react-router";
 import Topbar from "../../components/topbar/Topbar";
 import Loading from "../../components/loading/Loading";
+import Nothing from "../../components/nothing/nothing";
 
 
 function unixTimeToDays(unixTime: number) {
@@ -127,9 +128,12 @@ export default function Home() {
                             </div>
                             <div className="home__friends-list">
                                 {
+                                    (friends && friends.length > 0) ?
                                     friends.map((friend) => (
                                         <Steambar friend={friend} />
                                     ))
+                                    :
+                                    <Nothing text="Try getting more friends!"/>
                                 }
                             </div>
                         </div>   
@@ -141,41 +145,19 @@ export default function Home() {
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
                             </svg>
                         </div>
-                        {
-                            (recentGames.length) > 0 ? (
-                                <div className="home__recent-list">
-                                    {
-                                        recentGames.map((game: any) => (
-                                            <div className="home__recent-game">
-                                                <img src={game.img_icon_url === "" ? "https://cdn.discordapp.com/attachments/946407954180108328/1098972496453173389/sport.png" : "https://cdn.akamai.steamstatic.com/steam/apps/" + game.appid + "/header.jpg"}  alt={game.name} />
-                                                <div className="home__recent-gamebg">{game.name}</div>
-                                            </div>  
-                                        ))
-                                    }
-                                </div>
-                            ) :
-                            (
-                                <div className="home__no-recent-list">
-                                    <motion.img  
-                                        animate={{
-                                            y: [0, 20, 0, -20, 0],
-                                            scale: [1, 0.8, 1, 0.8, 1],
-                                            rotate: [0, 10, 0, -10, 0]
-                                        }}
-                                        transition={{
-                                            duration: 5.5,
-                                            ease: "linear",
-                                            repeat: Infinity
-                                        }}
-                                        className="home__no-recent-logo" 
-                                        src={X} alt="Xylium Logo" 
-                                    />
-                                    <span className="home__no-recent-heading">Owww.. Nothing to show</span>
-                                    <span className="home__no-recent-desc">Play more to get something here!</span>
-                                </div>
-                            )
-                        }
-                        
+                        <div className="home__recent-list">
+                            {
+                                (recentGames && recentGames.length > 0) ? 
+                                recentGames.map((game: any) => (
+                                    <div className="home__recent-game">
+                                        <img src={game.img_icon_url === "" ? "https://cdn.discordapp.com/attachments/946407954180108328/1098972496453173389/sport.png" : "https://cdn.akamai.steamstatic.com/steam/apps/" + game.appid + "/header.jpg"}  alt={game.name} />
+                                        <div className="home__recent-gamebg">{game.name}</div>
+                                    </div>  
+                                ))
+                                :
+                                <Nothing text="Play more to get something here!"/>
+                            }
+                        </div>
                     </div>
                 </motion.div>
             </div>
