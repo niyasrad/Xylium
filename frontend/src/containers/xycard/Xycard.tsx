@@ -45,7 +45,7 @@ export default function Xycard() {
 
     return (
         <div className="xycard">
-            <Topbar />
+            <Topbar menu="card"/>
             <motion.div 
                 className="xycard__content"
                 initial={{ opacity: 0 }} 

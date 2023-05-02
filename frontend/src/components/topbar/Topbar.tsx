@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useAppWrapperContext } from "../../AppWrapper";
 import './Topbar.css'
 
-export default function Topbar() {
+export default function Topbar({ menu }: { menu: string }) {
 
     const navigate = useNavigate()
     const { handleSignOut, globalUsername, isLoggedIn } = useAppWrapperContext()
@@ -21,8 +21,9 @@ export default function Topbar() {
                         (
                         <>
                             <div className="topbar__nav-buttons">
-                                <Link to={`../${globalUsername}/xycard`} className="topbar__nav-button link">XYCARD</Link>
-                                <span className="topbar__nav-button link">DBOARD</span>
+                                { menu !== "home" && <Link to="../home" className="topbar__nav-button link">HOME</Link>}
+                                { menu !== "card" && <Link to={`../${globalUsername}/xycard`} className="topbar__nav-button link">XYCARD</Link>}
+                                { menu !== "board" && <Link to={`../${globalUsername}/xycard`} className="topbar__nav-button link">DBOARD</Link>}
                             </div>
                             <span className="topbar__welcome">Welcome, {globalUsername}
                                 <svg 
@@ -50,14 +51,20 @@ export default function Topbar() {
                     }
                 </div>
                 <div className="topbar__navigation-options">
-                    <svg 
-                        onClick={() => {
-                            handleSignOut!()
-                            navigate('/login')
-                        }} 
-                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="topbar__signout--mobile link">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
-                    </svg>
+                    {
+                        isLoggedIn && 
+                        (
+                            <svg 
+                                onClick={() => {
+                                    handleSignOut!()
+                                    navigate('/login')
+                                }} 
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="topbar__signout--mobile link">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                            </svg>
+                        )
+                    }
+                    
                     <svg 
                         onClick={() => {
                             setMobileNavbar(!mobileNavbar)
@@ -78,8 +85,28 @@ export default function Topbar() {
                         
                     >   
                         <div className="topbar__mobile-nav">
-                            <span className="topbar__nav-button">XYCARD</span>
-                            <span className="topbar__nav-button">DBOARD</span>
+                            {
+                                isLoggedIn ?
+                                (
+                                    <>
+                                        { menu !== "home" && <Link to="../home" className="topbar__nav-button link">HOME</Link>}
+                                        { menu !== "card" && <Link to={`../${globalUsername}/xycard`} className="topbar__nav-button link">XYCARD</Link>}
+                                        { menu !== "board" && <Link to={`../${globalUsername}/xycard`} className="topbar__nav-button link">DBOARD</Link>}
+                                    </> 
+                                ) :
+                                (
+                                    <> 
+                                        <Link className="topbar__welcome" to={'/login'}>
+                                            TRY XYLIUM
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="topbar__signout link">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
+                                            </svg>
+                                        </Link>
+                                    </>
+                                    
+                                )
+                            }
+                            
                         </div>
                     </motion.div>
                 }

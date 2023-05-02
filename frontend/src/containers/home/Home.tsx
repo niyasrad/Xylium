@@ -93,7 +93,7 @@ export default function Home() {
     }
     return(
         <div className="home">
-            <Topbar />
+            <Topbar menu="home"/>
             <div className="home__content">
                 <motion.div 
                     className="home__main"
