@@ -37,6 +37,9 @@
 }
 .topbar__nav-button {
     display: flex;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
     gap: 20px;
     align-items: center;
     font-weight: 600;
