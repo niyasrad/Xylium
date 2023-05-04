@@ -15,6 +15,7 @@ import Nothing from "../../components/nothing/nothing";
 export default function Xycard() {
 
     const [loading, setLoading] = useState<boolean>(true)
+    const [invalidSteam, setInvalidSteam] = useState(false)
     const navigate = useNavigate()
     const xycardRef = useRef<any>()
     const { user } = useParams()
@@ -32,8 +33,11 @@ export default function Xycard() {
         .catch((err) => {
             if (err.response.status === 400) {
                 navigate('../404')
-            }
-            console.log(err.response.data.message)
+            } 
+            setInvalidSteam(true)
+        })
+        .finally(() => {
+            setLoading(false)
         })
     }, [])
 
@@ -78,7 +82,7 @@ export default function Xycard() {
                             </div>
                         ) : (
                             <div className="xycard__no-games">
-                                <Nothing text="Play more to get something here!"/>
+                                <Nothing text={ invalidSteam ? "Your Steam-ID Does not Exist.": "Play more to get something here!"}/>
                             </div>
                         )
                     }
