@@ -17,7 +17,11 @@ export default function Profilebar({ username }: { username: string}) {
             setUserData(res.data)
         })
         .catch((err) => {
-            console.log(err)
+            setUserData({
+                avatarfull: '',
+                personaname: 'User',
+                personastate: 0
+            })
         })
     }, [])
 

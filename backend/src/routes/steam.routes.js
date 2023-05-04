@@ -63,7 +63,14 @@ router.get('/friends', authMiddleWare, async (req, res) => {
         return res.status(200).json(filteredFriends)
     
     } catch (err) {
-        console.error(err);
+        console.log(err);
+
+        if (err.response.status === 401) {
+            return res.status(400).json({
+                message: "Steam Profile Private!"
+            })
+        }
+
         return res.status(500).json({
             message: "Internal server error!"
         })
@@ -103,6 +110,13 @@ router.get('/recent/:username?', userAttach, async (req, res) => {
     
     } catch (err) {
         console.error(err);
+
+        if (err.response.status === 401) {
+            return res.status(400).json({
+                message: "Steam Profile Private!"
+            })
+        }
+        
         return res.status(500).json({
             message: "Internal server error!"
         })

@@ -49,6 +49,10 @@ function getTimeCreated(response: any) {
 export default function Home() {
     
     const { globalUsername, isLoggedIn, handleSignOut } = useAppWrapperContext()
+
+    const [privateSteam, setPrivateSteam] = useState(false)
+    const [invalidSteam, setInvalidSteam] = useState(false)
+
     const [mobileNavbar, setMobileNavbar] = useState(false)
     const [loading, setLoading] = useState(true)
     const [friends, setFriends] = useState([])
@@ -72,7 +76,20 @@ export default function Home() {
                 setFriends(res2.data)
                 setRecentGames(res3.data.games)
             }))
-            .catch(() => navigate('/'))
+            .catch((err) => {
+                if (err.response.data.message === "Steam Profile Private!") {
+                    setPrivateSteam(true)
+                    setResult({
+                        steamid: "Profile Private"
+                    })
+                } else {
+                    setInvalidSteam(true)
+                    setResult({
+                        steamid: "Invalid Profile"
+                    })
+                }
+                
+            })
             .finally(() => setLoading(false))
         } catch (err) {
              navigate('/')
@@ -108,7 +125,7 @@ export default function Home() {
                                 <span className="home__type-bg">Your Steam Was&nbsp;</span>
                                 <span className="home__type-writed-text link">
                                     <Typewriter 
-                                        words={words}
+                                        words={ invalidSteam ? ["Not Found. Please Check your Steam-ID, and Try Again."] : privateSteam ? ["Suspected to be Private, Change Visibility to Public."]: words}
                                         loop={0}
                                         cursor
                                         cursorStyle='_'
@@ -133,7 +150,7 @@ export default function Home() {
                                         <Steambar friend={friend} />
                                     ))
                                     :
-                                    <Nothing text="Try getting more friends!"/>
+                                    <Nothing text={invalidSteam ? "Your Steam-ID Does not Exist." : privateSteam ? "Your Steam Profile is Private!" : "Try getting more friends!"}/>
                                 }
                             </div>
                         </div>   
@@ -155,7 +172,7 @@ export default function Home() {
                                     </div>  
                                 ))
                                 :
-                                <Nothing text="Play more to get something here!"/>
+                                <Nothing text={invalidSteam ? "Your Steam-ID Does not Exist." : privateSteam ? "Your Steam Profile is Private!" : "Play more to get something here!"} />
                             }
                         </div>
                     </div>
