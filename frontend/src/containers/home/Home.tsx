@@ -168,7 +168,11 @@ export default function Home() {
                                 recentGames.map((game: any) => (
                                     <div className="home__recent-game">
                                         <img src={game.img_icon_url === "" ? "https://cdn.discordapp.com/attachments/946407954180108328/1098972496453173389/sport.png" : "https://cdn.akamai.steamstatic.com/steam/apps/" + game.appid + "/header.jpg"}  alt={game.name} />
-                                        <div className="home__recent-gamebg">{game.name}</div>
+                                        <div className="home__recent-gamebg">
+                                            <span className="home__recent-gamename">
+                                                {game.name}
+                                            </span>
+                                        </div>
                                     </div>  
                                 ))
                                 :
