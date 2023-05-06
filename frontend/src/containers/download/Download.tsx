@@ -18,9 +18,7 @@ const Download = React.forwardRef((props: any, ref: any) => {
         .then((res) => {
             setUserData(res.data)
         })
-        .catch((err) => {
-            console.log(err)
-        })
+        .catch(() => {})
     }, [])
 
     return (

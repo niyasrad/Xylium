@@ -48,10 +48,9 @@ function getTimeCreated(response: any) {
 
 export default function Home() {
     
-    const { globalUsername, isLoggedIn, handleSignOut } = useAppWrapperContext()
+    const { globalUsername, isLoggedIn, privateSteam, invalidSteam, handleSignOut } = useAppWrapperContext()
 
-    const [privateSteam, setPrivateSteam] = useState(false)
-    const [invalidSteam, setInvalidSteam] = useState(false)
+    
 
     const [mobileNavbar, setMobileNavbar] = useState(false)
     const [loading, setLoading] = useState(true)
@@ -65,6 +64,10 @@ export default function Home() {
     //https://xylium.onrender.com
     //http://localhost:8080
     useEffect(() => {
+        if (privateSteam || invalidSteam) {
+            setLoading(false)
+            return
+        }
         try {
             axios.all([ 
                 axios.get('https://xylium.onrender.com/user/person/me'),
@@ -76,20 +79,7 @@ export default function Home() {
                 setFriends(res2.data)
                 setRecentGames(res3.data.games)
             }))
-            .catch((err) => {
-                if (err.response.data.message === "Steam Profile Private!") {
-                    setPrivateSteam(true)
-                    setResult({
-                        steamid: "Profile Private"
-                    })
-                } else {
-                    setInvalidSteam(true)
-                    setResult({
-                        steamid: "Invalid Profile"
-                    })
-                }
-                
-            })
+            .catch(() => {})
             .finally(() => setLoading(false))
         } catch (err) {
              navigate('/')
@@ -120,7 +110,7 @@ export default function Home() {
                     <div className="home__first">
                         <div className="home__profile">
                             <span className="home__username">{globalUsername}</span>
-                            <span className="home__steamid">{result.steamid}</span>
+                            <span className="home__steamid">{privateSteam ? "Profile Private" : invalidSteam ? "Profile Invalid" : result.steamid}</span>
                             <div className="home__type-writer">
                                 <span className="home__type-bg">Your Steam Was&nbsp;</span>
                                 <span className="home__type-writed-text link">
