@@ -21,7 +21,7 @@ export default function Landing() {
 
     useEffect(() => {
         fetch('https://xylium.onrender.com/server')
-        .then((res) => console.log(res))
+        .then(() => {})
     }, [])
     
     return (

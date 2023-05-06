@@ -6,14 +6,20 @@ import './AppWrapper.css'
 interface AppWrapperContextType {
   isLoggedIn : boolean,
   globalUsername: string,
+  privateSteam: boolean,
+  invalidSteam: boolean,
   setIsLoggedIn? : Dispatch<SetStateAction<boolean>>,
   setGlobalUsername?: Dispatch<SetStateAction<string>>,
+  setPrivateSteam?: Dispatch<SetStateAction<boolean>>,
+  setInvalidSteam?: Dispatch<SetStateAction<boolean>>
   handleSignOut?: () => void;
 }
 
 const defaultValue = {
   isLoggedIn: false,
-  globalUsername: ''
+  globalUsername: '',
+  privateSteam: false,
+  invalidSteam: false
 }
 
 const AppWrapperContext = createContext<AppWrapperContextType>(defaultValue)
@@ -25,11 +31,15 @@ function AppWrapper({ children }: { children: React.ReactNode }) {
 
   const [isLoggedIn, setIsLoggedIn] = useState(defaultValue.isLoggedIn)
   const [globalUsername, setGlobalUsername] = useState(defaultValue.globalUsername)
+  const [privateSteam, setPrivateSteam] = useState(false)
+  const [invalidSteam, setInvalidSteam] = useState(false)
 
 
   const ResetAppContext = () => {
     setGlobalUsername(defaultValue.globalUsername)
     setIsLoggedIn(defaultValue.isLoggedIn)
+    setPrivateSteam(defaultValue.privateSteam)
+    setInvalidSteam(defaultValue.invalidSteam)
   }
 
   const handleSignOut = () => {
@@ -48,7 +58,18 @@ function AppWrapper({ children }: { children: React.ReactNode }) {
     axios.get('https://xylium.onrender.com/api/checkauth')
     .then((res) => {
       setGlobalUsername!(res.data.message ? res.data.message : '')
-      setIsLoggedIn(true)
+      axios.get('https://xylium.onrender.com/user/person/me')
+      .then((res) => {
+        if (res.data.communityvisibilitystate !== 3) {
+          setPrivateSteam!(true)
+        }
+      })
+      .catch((err) => {
+        setInvalidSteam!(true)
+      })
+      .finally(() => {
+        setIsLoggedIn(true)
+      })
     })
     .catch(() => {
       localStorage.removeItem("accessToken")
@@ -63,8 +84,12 @@ function AppWrapper({ children }: { children: React.ReactNode }) {
       value = {{
         isLoggedIn,
         globalUsername,
+        privateSteam,
+        invalidSteam,
         setIsLoggedIn,
         setGlobalUsername,
+        setPrivateSteam,
+        setInvalidSteam,
         handleSignOut
       }}
     >
