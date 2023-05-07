@@ -1,0 +1,64 @@
+.dg-bar {
+    width: 90%;
+    max-width: 450px;
+    display: flex;
+    border-radius: 6px;
+    overflow: hidden;
+    transition: 0.5s all ease-in-out;
+}
+.dg-bar:hover {
+    box-shadow: 0px 0px 70px 8px #76003E;
+}
+
+.dg-bar__image {
+    width: 50%;
+    object-fit: cover;
+}
+.dg-bar__info {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+.dg-bar__i-title {
+    font-size: 20px;
+    width: 100%;
+    height: 100%;
+    min-height: 50px;
+    background-image: var(--xylium-button);
+    background-size: 200%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 10px;
+    box-sizing: border-box;
+    transition: 0.2s all ease-in-out;
+}
+.dg-bar:hover .dg-bar__i-title {
+    background-position: right center;
+}
+.dg-bar__i-playtime {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+    background-image: var(--xylium-bg);
+    color: var(--xylium-color-pink);
+}
+.dg-bar__i-mins {
+    color: var(--xylium-color-violentpink);
+    font-size: 20px;
+}
+
+@media only screen and (max-width: 1300px) {
+    .dg-bar {
+        flex-direction: column;
+    }
+    .dg-bar__image {
+        width: 100%;
+    }
+    .dg-bar__info {
+        width: 100%;
+    }
+}

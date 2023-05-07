@@ -1,0 +1,65 @@
+.df-bar {
+    width: 90%;
+    max-width: 290px;
+    display: flex;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.df-bar__icon {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+}
+.df-bar__friend {
+    width: 60%;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+}
+.df-bar__title {
+    font-size: 20px;
+    min-height: 50px;
+    width: 100%;
+    background-image: var(--xylium-button);
+    background-size: 200%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 10px;
+    box-sizing: border-box;
+    transition: 0.2s all ease-in-out;
+    border-top-right-radius: 8px;
+}
+.df-bar__info {
+    height: 100%;
+    border-bottom-right-radius: 8px;
+    background-image: var(--xylium-bg);
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    box-sizing: border-box;
+    gap: 5px;
+    color: var(--xylium-color-pink);
+}
+.df-bar__i-since {
+    color: var(--xylium-color-violentpink);
+    font-size: 20px;
+}
+
+@media only screen and (max-width: 1300px) {
+    .df-bar {
+        flex-direction: column;
+    }
+    .df-bar__icon {
+        width: 100%;
+        height: 75px;
+        object-fit: cover;
+    }
+    .df-bar__friend {
+        width: 100%;
+    }
+    .df-bar__title {
+        border-top-right-radius: 0px;
+    }
+}

@@ -59,7 +59,7 @@ router.get('/friends', authMiddleWare, async (req, res) => {
             })
         }
 
-        const filteredFriends = friends.friendslist.friends.slice(0, 3)
+        const filteredFriends = friends.friendslist.friends
         return res.status(200).json(filteredFriends)
     
     } catch (err) {
@@ -122,4 +122,37 @@ router.get('/recent/:username?', userAttach, async (req, res) => {
         })
     }
 })
+
+
+router.get('/games', authMiddleWare, async (req, res) => {
+
+    const user = await User.findOne({ username: req.username })
+
+    if (!user) {
+        return res.status(400).json({
+            message: "User not found!"
+        })
+    }
+    
+    try {
+
+        const result = await axios.get('http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=' + process.env.STEAM_KEY + '&steamid=' + user.steamid + '&format=json&include_appinfo=true')
+        
+        if (!result || !result.data || !result.data.response || !result.data.response.games) {
+            return res.status(400).json({
+                message: "Unable to retrieve games list!"
+            })
+        }
+        return res.status(200).json(result.data.response)
+    
+    } catch (err) {
+        console.log(err)
+        return res.status(500).json({
+            message: "Internal server error!"
+        })
+    }
+
+    
+})
+
 module.exports = router

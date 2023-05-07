@@ -64,6 +64,11 @@ export default function Home() {
     //https://xylium.onrender.com
     //http://localhost:8080
     useEffect(() => {
+        axios.get('https://xylium.onrender.com/api/checkauth')
+        .then(() => {})
+        .catch(() => {
+            navigate('/')
+        })
         if (privateSteam || invalidSteam) {
             setLoading(false)
             return
@@ -136,8 +141,8 @@ export default function Home() {
                             <div className="home__friends-list">
                                 {
                                     (friends && friends.length > 0) ?
-                                    friends.map((friend) => (
-                                        <Steambar friend={friend} />
+                                    friends.slice(0,3).map((friend) => (
+                                        <Steambar friend={friend} dboard={false} />
                                     ))
                                     :
                                     <Nothing text={invalidSteam ? "Your Steam-ID Does not Exist." : privateSteam ? "Your Steam Profile is Private!" : "Try getting more friends!"}/>
