@@ -23,7 +23,7 @@ export default function Topbar({ menu }: { menu: string }) {
                             <div className="topbar__nav-buttons">
                                 { menu !== "home" && <Link to="../home" className="topbar__nav-button link">HOME</Link>}
                                 { menu !== "card" && <Link to={`../${globalUsername}/xycard`} className="topbar__nav-button link">XYCARD</Link>}
-                                { menu !== "board" && <Link to={`../${globalUsername}/xycard`} className="topbar__nav-button link">DBOARD</Link>}
+                                { menu !== "board" && <Link to={`../dboard`} className="topbar__nav-button link">DBOARD</Link>}
                             </div>
                             <span className="topbar__welcome">Welcome, {globalUsername}
                                 <svg 
@@ -91,7 +91,7 @@ export default function Topbar({ menu }: { menu: string }) {
                                     <>
                                         { menu !== "home" && <Link to="../home" className="topbar__nav-button link">HOME</Link>}
                                         { menu !== "card" && <Link to={`../${globalUsername}/xycard`} className="topbar__nav-button link">XYCARD</Link>}
-                                        { menu !== "board" && <Link to={`../${globalUsername}/xycard`} className="topbar__nav-button link">DBOARD</Link>}
+                                        { menu !== "board" && <Link to={`../dboard`} className="topbar__nav-button link">DBOARD</Link>}
                                     </> 
                                 ) :
                                 (

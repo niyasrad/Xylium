@@ -14,6 +14,7 @@ import AppWrapper from './AppWrapper'
 import Home from './containers/home/Home'
 import Xycard from './containers/xycard/Xycard'
 import NotFound from './containers/NotFound/NotFound'
+import DBoard from './containers/dboard/DBoard'
 
 
 const router = createBrowserRouter([
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
   {
     path: '/:user/xycard',
     element: <Xycard />
+  },
+  {
+    path: '/dboard',
+    element: <DBoard />
   },
   {
     path: '/404',
