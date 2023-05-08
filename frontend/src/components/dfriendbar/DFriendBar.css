@@ -4,6 +4,10 @@
     display: flex;
     border-radius: 8px;
     overflow: hidden;
+    transition: 0.5s all ease-in-out;
+}
+.df-bar:hover {
+    box-shadow: 0px 0px 70px 8px #76003E;
 }
 
 .df-bar__icon {
@@ -30,6 +34,9 @@
     box-sizing: border-box;
     transition: 0.2s all ease-in-out;
     border-top-right-radius: 8px;
+}
+.df-bar:hover .df-bar__title {
+    background-position: center right;
 }
 .df-bar__info {
     height: 100%;
@@ -58,8 +65,19 @@
     }
     .df-bar__friend {
         width: 100%;
+        height: unset;
     }
     .df-bar__title {
         border-top-right-radius: 0px;
+    }
+    .df-bar__info {
+        font-size: 14px;
+    }
+    .df-bar__i-since {
+        font-size: 16px;
+    }
+    .df-bar__title {
+        font-size: 18px;
+        min-height: 40px;
     }
 }

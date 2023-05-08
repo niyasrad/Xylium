@@ -61,4 +61,14 @@
     .dg-bar__info {
         width: 100%;
     }
+    .dg-bar__i-playtime {
+        font-size: 14px;
+    }
+    .dg-bar__i-title {
+        font-size: 18px;
+        min-height: 40px;
+    }
+    .dg-bar__i-mins {
+        font-size: 16px;
+    }
 }
