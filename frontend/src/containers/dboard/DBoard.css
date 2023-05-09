@@ -59,6 +59,7 @@
     padding: 50px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
     gap: 30px;
     transition: 0.5s all ease-in-out;
 }
