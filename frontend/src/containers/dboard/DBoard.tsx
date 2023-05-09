@@ -19,7 +19,6 @@ export default function DBoard() {
 
     const [friends, setFriends] = useState<any>()
     const [games, setGames] = useState<any>()
-    console.log(games)
     const [result, setResult] = useState({
         steamid: "Loading..",
         avatarfull: 'https://cdn.discordapp.com/attachments/946407954180108328/1098973545431826472/sport_184_184_px.png'
@@ -73,56 +72,49 @@ export default function DBoard() {
                             <div className="dboard__s-title">
                                 Friends
                             </div>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="dboard__s-svg link">
+                            <svg onClick={() => navigate('/friends')} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="dboard__s-svg link">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
                             </svg>
                         </div>    
-                        
+                        <div className="dboard__s-list">
                         {
                             (friends && friends.length > 0) ? 
                             (
-                                <div className="dboard__s-list">
-                                    {
+                                
                                         friends.slice(0,6).map((friend: any) => (
                                             <DFriendBar friend={friend} key={friend.steamid}/>
-                                        ))
-                                    }
-                                </div> 
+                                        )) 
                             )   
                             :
                             (
-                                <Nothing text={ invalidSteam ? "" : privateSteam ? "" : "Buy more games to show something here!"} />
+                                <Nothing text={ invalidSteam ? "Your Steam-ID Does not Exist." : privateSteam ? "Your Steam Profile is Private!" :  "Try getting more friends!"} />
                             )
                         }
-                        
+                        </div>
                     </div>
                     <div className="dboard__section">
                         <div className="dboard__s-header">
                             <div className="dboard__s-title">
                                 Owned Games
                             </div>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="dboard__s-svg link">
+                            <svg onClick={() => navigate('/games')} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="dboard__s-svg link">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
                             </svg>
                         </div>    
-                        
+                        <div className="dboard__s-list">
                         {
                             (games && games.games.length > 0) ? 
                             (
-                                <div className="dboard__s-list">
-                                    {
-                                        games.games.slice(0,6).map((game: any) => (
-                                            <DGamesBar game={game} key={game.name}/>
-                                        ))
-                                    }
-                                </div> 
+                                games.games.slice(0,6).map((game: any) => (
+                                    <DGamesBar game={game} key={game.name}/>
+                                ))
                             )   
                             :
                             (
-                                <Nothing text={ invalidSteam ? "" : privateSteam ? "" : "Buy more games to show something here!"} />
+                                <Nothing text={ invalidSteam ? "Your Steam-ID Does not Exist." : privateSteam ? "Your Steam Profile is Private!" : "Buy more games to show something here!"} />
                             )
                         }
-                        
+                        </div> 
                     </div>
                     
                 </motion.div>

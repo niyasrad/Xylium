@@ -15,6 +15,7 @@ import Home from './containers/home/Home'
 import Xycard from './containers/xycard/Xycard'
 import NotFound from './containers/NotFound/NotFound'
 import DBoard from './containers/dboard/DBoard'
+import Pagination from './containers/dboard/pagination/Pagination'
 
 
 const router = createBrowserRouter([
@@ -41,6 +42,14 @@ const router = createBrowserRouter([
   {
     path: '/dboard',
     element: <DBoard />
+  },
+  {
+    path: '/games',
+    element: <Pagination listing="games" />
+  },
+  {
+    path: '/friends',
+    element: <Pagination listing="friends" />
   },
   {
     path: '/404',
