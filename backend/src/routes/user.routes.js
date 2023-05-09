@@ -2,6 +2,7 @@ const router = require('express').Router()
 const jwt = require('jsonwebtoken')
 const bcrpyt = require('bcrypt')
 const User = require('../models/user')
+const { default: axios } = require('axios');
 const { authMiddleWare } = require('../utils/auth')
 
 
@@ -67,6 +68,40 @@ router.post('/signin', async (req, res) => {
         username: user.username,
         accessToken: token
     })
+})
+
+router.get('/checksteamauth', async (req, res) => {
+
+    let steamExists = true;
+    
+    if (!req.query.steamid) {
+        return res.status(400).json({
+            message: "Enter a valid SteamID"
+        })
+    }
+
+    await axios.get('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' + process.env.STEAM_KEY + '&steamids=' + req.query.steamid)
+    .then((res) => {
+        if (!res.data || !res.data.response || !res.data.response.players || res.data.response.players.length === 0) {
+            steamExists = false
+        }
+        
+    })
+    .catch((err) => {
+        console.log(err)
+        steamExists = false
+    })
+
+    if (steamExists) {
+        return res.status(200).json({
+            message: "SteamID is Valid"
+        })
+    } 
+
+    return res.status(400).json({
+        message: "This SteamID Does Not Exist!"
+    })
+
 })
 
 router.get('/checkauth', authMiddleWare, (req, res) => {
