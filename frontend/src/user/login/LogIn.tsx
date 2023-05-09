@@ -15,9 +15,17 @@ export default function LogIn() {
     const { isLoggedIn, setIsLoggedIn, setGlobalUsername } = useAppWrapperContext()
     const navigate = useNavigate()
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (username.length < 3) {
             setErrMessage("Username/SteamID needs to be longer than 2 Characters!")
+            return
+        }
+        if (username.length > 15) {
+            setErrMessage("Username/SteamID needs to be lesser than 16 Characters!")
+            return
+        }
+        if (!(/^\w+$/.test(username))) {
+            setErrMessage("Username must not contain special Characters!")
             return
         }
         if (password.length < 5) {
