@@ -7,6 +7,10 @@
 .steam-bar__name {
     background: linear-gradient(180deg, #CC208E 0%, #6713D2 100%);
     width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     padding: 15px;
     box-sizing: border-box;
     font-weight: 600;
@@ -34,6 +38,10 @@
     font-size: 16px;
     color: var(--xylium-color-darkpink);
     font-weight: 600;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 @media only screen and (max-width: 1300px) {
     .steam-bar {
