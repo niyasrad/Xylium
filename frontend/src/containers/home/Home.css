@@ -44,10 +44,18 @@
 }
 .home__username {
     font-size: 32px;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .home__steamid {
     font-size: 20px;
     color: var(--xylium-color-darkpink);
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .home__type-writer {
     padding-top: 20px;
