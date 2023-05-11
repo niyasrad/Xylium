@@ -107,6 +107,7 @@
     box-sizing: border-box;
     padding: 30px;
     display: flex;
+    align-items: center;
     flex-direction: column;
     gap: 50px;
     transition: all 0.5s ease-in-out;
@@ -142,6 +143,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 50px;
+    justify-content: space-around;
     align-items: center;
     padding: 30px;
     box-sizing: border-box;

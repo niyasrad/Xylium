@@ -12,7 +12,7 @@ router.post('/signup', async (req, res) => {
 
     if (user) {
         return res.status(400).json({
-            message: "The E-mail/SteamID has already been registered!"
+            message: "The Username/SteamID has already been registered!"
         })
     }
     
