@@ -143,6 +143,9 @@ router.get('/games', authMiddleWare, async (req, res) => {
                 message: "Unable to retrieve games list!"
             })
         }
+        
+        result.data.response.games.sort( (gameOne, gameTwo) => gameTwo.playtime_forever - gameOne.playtime_forever)
+
         return res.status(200).json(result.data.response)
     
     } catch (err) {
