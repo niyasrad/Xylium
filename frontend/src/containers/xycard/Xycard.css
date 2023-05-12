@@ -39,13 +39,17 @@
 
 .xycard__information {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: space-between;
+    gap: 50px;
 }
 
 .xycard__games-list {
+    justify-content: center;
     display: flex;
-    flex-direction: column;
     gap: 50px;
+    flex-wrap: wrap;
 }
 
 .xycard__recent-game {
@@ -69,22 +73,29 @@
 
 
 .xycard__diagnosis {
-    max-width: 350px;
+    max-width: 90%;
     padding: 20px;
-    text-align: end;
+    text-align: center;
     display: flex;
+    align-items: center;
     flex-direction: column;
     gap: 10px;
     box-sizing: border-box;
 }
 .xycard__dia-intro {
     font-size: 22px;
-    color: var(--xylium-color-darkpink);
+    color: var(--xylium-color-violentpink);
 }
 .xycard__dia-timings {
     font-size: 24px;
     letter-spacing: 0.22em;
-    color: var(--xylium-color-violentpink);
+    color: white;
+}
+.xycard__dia-intro--large {
+    font-size: 22px;
+}
+.xycard__dia-timings--large {
+    font-size: 64px;
 }
 
 .xycard__no-games {
@@ -136,6 +147,13 @@
         padding-top: 50px;
         flex-direction: column;
         gap: 50px;
+    }
+
+    .xycard__dia-intro--large {
+        font-size: 22px;
+    }
+    .xycard__dia-timings--large {
+        font-size: 24px;
     }
 
 }

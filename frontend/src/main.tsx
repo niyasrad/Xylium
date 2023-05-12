@@ -64,8 +64,7 @@ const router = createBrowserRouter([
 
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <AppWrapper>
+  <AppWrapper>
       <AnimatedCursor
         innerSize={15}
         outerSize={35}
@@ -89,7 +88,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         ]}
       />
       <RouterProvider router={router} />
-    </AppWrapper>
-    
-  </React.StrictMode>,
+    </AppWrapper>,
 )
