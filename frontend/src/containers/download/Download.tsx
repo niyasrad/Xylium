@@ -8,12 +8,18 @@ import './Download.css'
 const Download = React.forwardRef((props: any, ref: any) => {
 
     const { user } = useParams()
+    const [steamValue, setSteamValue] = useState<number>(0)
     const [userData, setUserData] = useState({
         games: [],
         total2weekplay: 0
     })
 
     useEffect(() => {
+        axios.get(`https://xylium.onrender.com/detail/account/${user}`)
+        .then((res) => {
+            setSteamValue(res.data.value ? res.data.value : 0)
+        })
+        .catch((err) => {})
         axios.get(`https://xylium.onrender.com/user/recent/${user}`)
         .then((res) => {
             setUserData(res.data)
@@ -46,6 +52,10 @@ const Download = React.forwardRef((props: any, ref: any) => {
                                 You played, in the last two weeks  for over,
                             </span>
                             <span className="download__dia-timings">{userData.total2weekplay} Minutes</span>
+                            <span className="download__dia-intro download__dia-intro--large">
+                                Your Steam is worth,
+                            </span>
+                            <span className="download__dia-timings download__dia-timings--large">${steamValue}</span>
                         </div>
                     </div>
                     ) : (

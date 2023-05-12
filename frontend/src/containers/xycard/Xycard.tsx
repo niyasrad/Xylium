@@ -19,12 +19,18 @@ export default function Xycard() {
     const navigate = useNavigate()
     const xycardRef = useRef<any>()
     const { user } = useParams()
+    const [steamValue, setSteamValue] = useState<number>(0)
     const [userData, setUserData] = useState({
         games: [],
         total2weekplay: 0
     })
 
     useEffect(() => {
+        axios.get(`https://xylium.onrender.com/detail/account/${user}`)
+        .then((res) => {
+            setSteamValue(res.data.value ? res.data.value : 0)
+        })
+        .catch((err) => {})
         axios.get(`https://xylium.onrender.com/user/recent/${user}`)
         .then((res) => {
             setUserData(res.data)
@@ -78,6 +84,10 @@ export default function Xycard() {
                                         You played, in the last two weeks  for over,
                                     </span>
                                     <span className="xycard__dia-timings">{userData.total2weekplay} Minutes</span>
+                                    <span className="xycard__dia-intro xycard__dia-intro--large">
+                                        Your Steam is worth,
+                                    </span>
+                                    <span className="xycard__dia-timings xycard__dia-timings--large">${steamValue}</span>
                                 </div>
                             </div>
                         ) : (

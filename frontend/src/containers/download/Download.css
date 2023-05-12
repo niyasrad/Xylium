@@ -9,6 +9,7 @@
     box-sizing: border-box;
     justify-content: space-between;
     background: linear-gradient(359.68deg, #000000 0.26%, #1B2025 99.71%);
+    background-color: black;
 }
 
 .download__games {
@@ -29,13 +30,17 @@
 
 .download__information {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: space-between;
+    gap: 50px;
 }
 
 .download__games-list {
+    justify-content: center;
     display: flex;
-    flex-direction: column;
     gap: 50px;
+    flex-wrap: wrap;
 }
 
 .download__recent-game {
@@ -59,24 +64,31 @@
 
 
 .download__diagnosis {
-    max-width: 350px;
+    max-width: 90%;
     padding: 20px;
-    text-align: end;
+    text-align: center;
     display: flex;
+    align-items: center;
     flex-direction: column;
     gap: 10px;
     box-sizing: border-box;
 }
 .download__dia-intro {
     font-size: 22px;
-    color: var(--xylium-color-darkpink);
+    color: var(--xylium-color-violentpink);
 }
 .download__dia-timings {
     font-size: 24px;
     letter-spacing: 0.22em;
-    color: var(--xylium-color-violentpink);
+    color: white;
 }
 
+.download__dia-intro--large {
+    font-size: 22px;
+}
+.download__dia-timings--large {
+    font-size: 64px;
+}
 
 .download__no-games {
     display: flex;
