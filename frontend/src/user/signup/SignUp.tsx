@@ -21,11 +21,11 @@ export default function SignUp() {
     const handleSubmit = async () => {
 
         if (username.length < 3) {
-            setErrMessage("Username/SteamID needs to be longer than 2 Characters!")
+            setErrMessage("Username needs to be longer than 2 Characters!")
             return
         }
         if (username.length > 15) {
-            setErrMessage("Username/SteamID needs to be lesser than 16 Characters!")
+            setErrMessage("Username needs to be lesser than 16 Characters!")
             return
         }
         if (!(/^\w+$/.test(username))) {

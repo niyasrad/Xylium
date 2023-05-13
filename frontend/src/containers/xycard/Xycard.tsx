@@ -99,7 +99,18 @@ export default function Xycard() {
                 </div>
             </motion.div>
             <div className="xycard__options">
-                <Button text="Download" onClick={() => exportComponentAsPNG(xycardRef, {'fileName' : `XYCARD__${user}`})}/>
+                <Button text="Download" onClick={() => 
+                    exportComponentAsPNG(
+                        xycardRef, 
+                        {
+                            'fileName' : `XYCARD__${user}`,
+                            'html2CanvasOptions' : {
+                                'scale': 4,
+                                'backgroundColor': "#000000"
+                            }
+                        })
+                    }
+                />
                 <Button text="Share Card" onClick={() => navigator.clipboard.writeText(`https://xylium.vercel.app/${user}/xycard`)} />
             </div>
             <Download ref={xycardRef}/>
