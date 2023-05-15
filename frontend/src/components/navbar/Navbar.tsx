@@ -18,7 +18,7 @@ export default function Navbar() {
                 </div>
                 <div className="navbar__right">
                     <Link to="/login" className="navbar__link navbar__link--pink">Try</Link>
-                    <a href="https://discord.gg/YypaF6bg" target="_blank" className="navbar__link">Support</a>
+                    <a href="https://discord.gg/p6Skb6ZjMF" target="_blank" className="navbar__link">Support</a>
                     <a href="https://github.com/niyasrad" target="_blank" className="navbar__link">GitHub</a>
                 </div>
             </div>
@@ -58,8 +58,8 @@ export default function Navbar() {
 
                                 </div>
                                 <Link to="/login" className="navbar__link navbar__link--pink">Try</Link>
-                                <a href="#" className="navbar__link">Support</a>
-                                <a href="#" className="navbar__link">GitHub</a>
+                                <a href="https://discord.gg/p6Skb6ZjMF" target="_blank" className="navbar__link">Support</a>
+                                <a href="https://github.com/niyasrad" target="_blank" className="navbar__link">GitHub</a>
                             </motion.div>
                         </>
                     )
