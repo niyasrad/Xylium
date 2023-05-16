@@ -109,7 +109,18 @@ export default function SignUp() {
                 </div>
                 <div className="sign__submit">
                     <p className="sign__submit-text">Already have an account? <Link to="/login" className="sign__submit-text--pink">Log in</Link></p>
-                    <Button text="Sign up" onClick={loading ? () => {} : handleSubmit}/>
+                    <motion.div
+                        animate={
+                            loading? {
+                                opacity: 0.3
+                            } : {
+                                opacity: 1
+                            }
+                        }
+                    >
+                        <Button text="Sign up" onClick={loading ? () => {} : handleSubmit}/>
+                    </motion.div>
+                    
                 </div>
             </div>
         </div>
