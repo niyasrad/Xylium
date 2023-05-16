@@ -10,12 +10,15 @@ export default function LogIn() {
     const [username, setUsername] = useState<string>('')
     const [password, setPassword] = useState<string>('')
 
+    const [loading, setLoading] = useState<boolean>(false)
+
     const [errMessage, setErrMessage] = useState<string>('')
 
     const { isLoggedIn, setIsLoggedIn, setGlobalUsername } = useAppWrapperContext()
     const navigate = useNavigate()
 
     const handleSubmit = async () => {
+        setLoading(true)
         if (username.length < 3) {
             setErrMessage("Username needs to be longer than 2 Characters!")
             return
@@ -49,6 +52,9 @@ export default function LogIn() {
             setGlobalUsername!('')
             setErrMessage(err.response.data.message)
         })
+        .finally(() => {
+            setLoading(false)
+        })
     }
 
     useEffect(() => {
@@ -79,7 +85,18 @@ export default function LogIn() {
                 </div>
                 <div className="sign__submit">
                     <p className="sign__submit-text">Don't have an account? <Link to="/signup" className="sign__submit-text--pink">Sign up</Link></p>
-                    <Button text="Log in" onClick={handleSubmit}/>
+                    <motion.div
+                        animate={
+                            loading? {
+                                opacity: 0.3
+                            } : {
+                                opacity: 1
+                            }
+                        }
+                    >
+                        <Button text="Log in" onClick={loading? () => {} : handleSubmit}/>
+                    </motion.div>
+                    
                 </div>
             </div>
         </div>
