@@ -9,16 +9,26 @@ import '../sign.css'
 export default function LogIn() {
     const [username, setUsername] = useState<string>('')
     const [password, setPassword] = useState<string>('')
-
+    
     const [loading, setLoading] = useState<boolean>(false)
 
     const [errMessage, setErrMessage] = useState<string>('')
 
-    const { isLoggedIn, setIsLoggedIn, setGlobalUsername } = useAppWrapperContext()
+    const { isLoggedIn, setIsLoggedIn, openSnackbar, setGlobalUsername } = useAppWrapperContext()
     const navigate = useNavigate()
 
+    useEffect(() => {
+        if (errMessage !== '') {
+            openSnackbar!({
+                message: errMessage,
+                type: "error"
+            })
+        }
+    }, [errMessage])
+
     const handleSubmit = async () => {
-        setLoading(true)
+        setErrMessage('')
+
         if (username.length < 3) {
             setErrMessage("Username needs to be longer than 2 Characters!")
             return
@@ -36,11 +46,16 @@ export default function LogIn() {
             return
         }
 
+        setLoading(true)
         axios.post('https://xylium.onrender.com/api/signin', {
             username: username,
             password: password
         })
         .then((res) => {
+            openSnackbar!({
+                message: "Logged into account!",
+                type: "success"
+            })
             localStorage.setItem("accessToken", res.data.accessToken)
             axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.accessToken}`
             setIsLoggedIn!(true)

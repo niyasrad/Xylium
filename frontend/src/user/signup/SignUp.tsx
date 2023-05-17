@@ -15,10 +15,22 @@ export default function SignUp() {
     const [errMessage, setErrMessage] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(false)
 
-    const { isLoggedIn, setIsLoggedIn, setGlobalUsername } = useAppWrapperContext()
+    const { isLoggedIn, setIsLoggedIn, openSnackbar, setGlobalUsername } = useAppWrapperContext()
+    
+    useEffect(() => {
+        if (errMessage !== '') {
+            openSnackbar!({
+                message: errMessage,
+                type: "error"
+            })
+        }
+    }, [errMessage])
+    
     const navigate = useNavigate()
 
     const handleSubmit = async () => {
+        
+        setErrMessage('')
 
         if (username.length < 3) {
             setErrMessage("Username needs to be longer than 2 Characters!")
@@ -38,6 +50,7 @@ export default function SignUp() {
         }
         if (steamID.length == 0) {
             setErrMessage("Please provide with the SteamID")
+            return
         }
 
         setLoading(true)

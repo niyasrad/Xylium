@@ -1,0 +1,67 @@
+.snackbar {
+    position: fixed;
+    z-index: 998;
+}
+.snackbar__wrapper {
+    position: relative;
+}
+.snackbar__prev {
+    position: absolute;
+    z-index: 996;
+    display: block;
+    top: -10px;
+    right: 5px;
+    height: 60px;
+    width: 360px;
+    background-image: var(--xylium-button);
+    box-shadow: 0px 4.17544px 61.5878px -10.4386px #B3005E;
+    border-radius: 6px;
+}
+
+.snackbar__content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 997;
+    min-height: 80px;
+    width: 400px;
+    background-image: var(--xylium-bg);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 50px;
+    padding: 10px 48px 10px 48px;
+    box-sizing: border-box;
+    border-radius: 0px 17.7456px 0px 48px;
+}
+.snackbar__icon {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    height: 50px;
+}
+.snackbar__message {
+    font-size: 20px;
+    font-weight: 700;
+    text-align: right;
+    background: linear-gradient(180deg, #f51fa6 0%, #9544ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}
+
+
+@media only screen and (max-width: 990px) {
+    .snackbar__prev {
+        width: 220px;
+    }
+    .snackbar {
+        width: 260px;
+    }
+    .snackbar__content {
+        padding: 10px 28px 10px 28px;
+        gap: 20px;
+        max-width: 320px;
+    }
+}
