@@ -1,6 +1,8 @@
 import axios from 'axios'
+import { AnimatePresence } from 'framer-motion'
 import React, { createContext, Dispatch, SetStateAction, useContext, useEffect, useLayoutEffect, useState } from 'react'
 import './AppWrapper.css'
+import Snackbar, { useSnackbar } from './components/snackbar/Snackbar'
 
 
 interface AppWrapperContextType {
@@ -13,6 +15,7 @@ interface AppWrapperContextType {
   setPrivateSteam?: Dispatch<SetStateAction<boolean>>,
   setInvalidSteam?: Dispatch<SetStateAction<boolean>>
   handleSignOut?: () => void;
+  openSnackbar?: ({ message, type }: any) => void;
 }
 
 const defaultValue = {
@@ -34,6 +37,7 @@ function AppWrapper({ children }: { children: React.ReactNode }) {
   const [privateSteam, setPrivateSteam] = useState(false)
   const [invalidSteam, setInvalidSteam] = useState(false)
 
+  const { isActive, openSnackbar, message, type } = useSnackbar()
 
   const ResetAppContext = () => {
     setGlobalUsername(defaultValue.globalUsername)
@@ -90,12 +94,16 @@ function AppWrapper({ children }: { children: React.ReactNode }) {
         setGlobalUsername,
         setPrivateSteam,
         setInvalidSteam,
+        openSnackbar,
         handleSignOut
       }}
     >
       {
         children
       }
+      <AnimatePresence>
+        <Snackbar isActive={isActive} type={type} message={message} />
+      </AnimatePresence>
     </AppWrapperContext.Provider>
   )
 }
