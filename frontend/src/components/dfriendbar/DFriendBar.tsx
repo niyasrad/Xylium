@@ -8,6 +8,8 @@ function unixTimestampToYear(timestamp: number) {
     return date.getFullYear();
 }
   
+export const defaultBlank = "https://avatars.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg"
+export const backupImage = "https://cdn.discordapp.com/attachments/946407954180108328/1098973545431826472/sport_184_184_px.png"
 
 export default function DFriendBar({ friend }: { friend : any}) {
     
@@ -15,7 +17,7 @@ export default function DFriendBar({ friend }: { friend : any}) {
     const [holder, setHolder] = useState({
         personaname: "Loading",
         steamid: 'Loading',
-        avatarfull: 'https://cdn.discordapp.com/attachments/946407954180108328/1098973545431826472/sport_184_184_px.png'
+        avatarfull: backupImage
     })
 
     useEffect(() => {
@@ -32,7 +34,11 @@ export default function DFriendBar({ friend }: { friend : any}) {
             initial={{ opacity: 0.2 }}
             animate={ loading ? { opacity: 0.2 } : { opacity: 1 }}
         >
-            <img src={holder.avatarfull} alt="" className="df-bar__icon" />
+            <img 
+                src={holder.avatarfull === defaultBlank ? backupImage : holder.avatarfull} 
+                alt="Profile Picture" 
+                className="df-bar__icon" 
+            />
             <div className="df-bar__friend">
                 <div className="df-bar__title">
                     {holder.personaname ? holder.personaname : 'Loading'}
