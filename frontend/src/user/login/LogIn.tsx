@@ -33,8 +33,8 @@ export default function LogIn() {
             setErrMessage("Username needs to be longer than 2 Characters!")
             return
         }
-        if (username.length > 15) {
-            setErrMessage("Username needs to be lesser than 16 Characters!")
+        if (username.length > 20) {
+            setErrMessage("Username needs to be lesser than 21 Characters!")
             return
         }
         if (!(/^\w+$/.test(username))) {

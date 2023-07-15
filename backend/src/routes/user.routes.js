@@ -8,11 +8,11 @@ const { authMiddleWare } = require('../utils/auth')
 
 router.post('/signup', async (req, res) => {
 
-    let user = await User.findOne({ $or: [{ steamid: req.body.steamid }, { username: req.body.username }]})
+    let user = await User.findOne({ $or: [{ steamid: req.body.steamid }, { username: req.body.username }, { email: req.body.email }]})
 
     if (user) {
         return res.status(400).json({
-            message: "The Username/SteamID has already been registered!"
+            message: "The Username/E-mail/SteamID has already been registered!"
         })
     }
     
@@ -22,6 +22,7 @@ router.post('/signup', async (req, res) => {
     try {
         const user = new User({
             username: req.body.username, 
+            email: req.body.email,
             password: hash,
             steamid: req.body.steamid
         })
@@ -46,7 +47,7 @@ router.post('/signup', async (req, res) => {
 
 router.post('/signin', async (req, res) => {
 
-    const user = await User.findOne({ $or: [ { username: req.body.username }, { steamid: req.body.username }] })
+    const user = await User.findOne({ $or: [ { username: req.body.username }, { steamid: req.body.username }, { email: req.body.email }] })
     
     if (!user) {
         return res.status(400).json({
