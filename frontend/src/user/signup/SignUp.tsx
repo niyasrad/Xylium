@@ -9,8 +9,11 @@ import '../sign.css'
 export default function SignUp() {
 
     const [username, setUsername] = useState<string>('')
+    const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [steamID, setSteamID] = useState<string>('')
+
+    const [step, setStep] = useState<number>(0)
 
     const [errMessage, setErrMessage] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(false)
@@ -36,10 +39,21 @@ export default function SignUp() {
             setErrMessage("Username needs to be longer than 2 Characters!")
             return
         }
-        if (username.length > 15) {
-            setErrMessage("Username needs to be lesser than 16 Characters!")
+        if (username.length > 20) {
+            setErrMessage("Username needs to be lesser than 21 Characters!")
             return
         }
+
+        if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))) {
+            setErrMessage("Please enter a proper E-mail")
+            return
+        }
+
+        if (step == 0) {
+            setStep(1)
+            return
+        }
+
         if (!(/^\w+$/.test(username))) {
             setErrMessage("Username must not contain special Characters!")
             return
@@ -63,6 +77,7 @@ export default function SignUp() {
         .then((res) => {
             axios.post('https://xylium.onrender.com/api/signup', {
                 username: username,
+                email: email,
                 password: password,
                 steamid: steamID
             })
@@ -104,18 +119,35 @@ export default function SignUp() {
                     <div className="sign__description">Create an Account</div>
                 </div>
                 <div className="sign__fields">
-                    <div className="sign__button">
-                        <div className="sign__field-screen"></div>
-                        <motion.input whileFocus={{ scale: 1.1 }} className="sign__field" required type="text" placeholder="Enter Username" onChange={(e) => setUsername(e.target.value)}/>
-                    </div>
-                    <div className="sign__button">
-                        <motion.input whileFocus={{ scale: 1.1 }} className="sign__field" required type="password" placeholder="Enter Password" onChange={(e) => setPassword(e.target.value)} />
-                        <div className="sign__field-screen"></div>
-                    </div>
-                    <div  className="sign__button">
-                        <motion.input whileFocus={{ scale: 1.1 }} className="sign__field" required type="text" placeholder="Enter SteamID" onChange={(e) => setSteamID(e.target.value)} />
-                        <div className="sign__field-screen"></div>
-                    </div>
+                    {
+                        step === 0 ?
+                        (
+                            <>
+                            <div className="sign__button">
+                                <div className="sign__field-screen"></div>
+                                <motion.input whileFocus={{ scale: 1.1 }} className="sign__field" required type="text" placeholder="Enter Username" onChange={(e) => setUsername(e.target.value)}/>
+                            </div>
+                            <div className="sign__button">
+                                <div className="sign__field-screen"></div>
+                                <motion.input whileFocus={{ scale: 1.1 }} className="sign__field" required type="email" placeholder="Enter E-mail" onChange={(e) => setEmail(e.target.value)}/>
+                            </div>
+                            </>
+                        ) :
+                        (
+                            <>
+                            <div className="sign__button">
+                                <motion.input whileFocus={{ scale: 1.1 }} className="sign__field" required type="password" placeholder="Enter Password" onChange={(e) => setPassword(e.target.value)} />
+                                <div className="sign__field-screen"></div>
+                            </div>
+                            <div  className="sign__button">
+                                <motion.input whileFocus={{ scale: 1.1 }} className="sign__field" required type="text" placeholder="Enter SteamID" onChange={(e) => setSteamID(e.target.value)} />
+                                <div className="sign__field-screen"></div>
+                            </div>
+                            </>
+                        )
+                    }
+                    
+                    
                 </div>
                 <div className="sign__error">
                     {errMessage}
@@ -131,7 +163,7 @@ export default function SignUp() {
                             }
                         }
                     >
-                        <Button text="Sign up" onClick={loading ? () => {} : handleSubmit}/>
+                        <Button text={step === 0 ? "Next" : "Sign up"} onClick={loading ? () => {} : handleSubmit}/>
                     </motion.div>
                     
                 </div>
