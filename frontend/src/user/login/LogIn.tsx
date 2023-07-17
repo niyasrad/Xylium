@@ -37,10 +37,6 @@ export default function LogIn() {
             setErrMessage("Username needs to be lesser than 21 Characters!")
             return
         }
-        if (!(/^\w+$/.test(username))) {
-            setErrMessage("Username must not contain special Characters!")
-            return
-        }
         if (password.length < 5) {
             setErrMessage("Password needs to be longer than 4 Characters!")
             return
