@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const jwt = require('jsonwebtoken')
-const bcrpyt = require('bcrypt')
+const bcrypt = require('bcrypt')
 const User = require('../models/user')
 const { default: axios } = require('axios');
 const { authMiddleWare } = require('../utils/auth')
@@ -17,7 +17,7 @@ router.post('/signup', async (req, res) => {
     }
     
 
-    const hash = await bcrpyt.hash(req.body.password, 10)
+    const hash = await bcrypt.hash(req.body.password, 10)
 
     try {
         const user = new User({
@@ -47,7 +47,7 @@ router.post('/signup', async (req, res) => {
 
 router.post('/signin', async (req, res) => {
 
-    const user = await User.findOne({ $or: [ { username: req.body.username }, { steamid: req.body.username }, { email: req.body.email }] })
+    const user = await User.findOne({ $or: [ { username: req.body.username }, { steamid: req.body.username }, { email: req.body.username }] })
     
     if (!user) {
         return res.status(400).json({
@@ -55,7 +55,7 @@ router.post('/signin', async (req, res) => {
         })
     }
 
-    const match = await bcrpyt.compare(req.body.password, user.password)
+    const match = await bcrypt.compare(req.body.password, user.password)
     
     if (!match) {
         return res.status(400).json({
