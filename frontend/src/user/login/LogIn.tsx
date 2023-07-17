@@ -1,6 +1,6 @@
 import axios from "axios";
 import { motion } from "framer-motion";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppWrapperContext } from "../../AppWrapper";
 import Button from "../../components/button/Button";
@@ -43,7 +43,7 @@ export default function LogIn() {
         }
 
         setLoading(true)
-        axios.post('https://xylium.onrender.com/api/signin', {
+        axios.post(import.meta.env.VITE_BASE_API + '/api/signin', {
             username: username,
             password: password
         })

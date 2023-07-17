@@ -1,6 +1,6 @@
 import axios from "axios";
 import { motion } from "framer-motion";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { exportComponentAsPNG } from "react-component-export-image";
 import { useNavigate, useParams } from "react-router";
 import Button from "../../components/button/Button";
@@ -8,7 +8,6 @@ import Loading from "../../components/loading/Loading";
 import Profilebar from "../../components/profilebar/Profilebar";
 import Topbar from "../../components/topbar/Topbar";
 import Download from "../download/Download";
-import X from '../../assets/X.svg'
 import './Xycard.css'
 import Nothing from "../../components/nothing/nothing";
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { motion } from "framer-motion";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import './DFriendBar.css'
 
 function unixTimestampToYear(timestamp: number) {
@@ -21,7 +21,7 @@ export default function DFriendBar({ friend }: { friend : any}) {
     })
 
     useEffect(() => {
-        axios.get('https://xylium.onrender.com/user/person/steamid/'+ friend.steamid)
+        axios.get(import.meta.env.VITE_BASE_API + '/user/person/steamid/'+ friend.steamid)
         .then((res) =>  {
             setHolder(res.data)
             setLoading(false)
