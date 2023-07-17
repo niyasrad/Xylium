@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Button from "../../components/button/Button";
 import Navbar from "../../components/navbar/Navbar";
 import { motion, useMotionValue } from "framer-motion";
@@ -20,7 +20,7 @@ export default function Landing() {
     }
 
     useEffect(() => {
-        fetch('https://xylium.onrender.com/server')
+        fetch(import.meta.env.VITE_BASE_API + '/server')
         .then(() => {})
     }, [])
     
@@ -47,7 +47,7 @@ export default function Landing() {
                     <motion.div 
                         onMouseMove={handleMouseMove}
                         style = {{ translateX : x, translateY : y }}
-                        transition = {{ duration: 0.3, type: 'spring', ease: "easeOut" }}
+                        transition = {{ duration: 0.3, type: 'spring' }}
                         className="landing__art"
                     >
                         <img className="landing__controller link" src={controller} alt="controller"/>

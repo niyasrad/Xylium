@@ -1,6 +1,6 @@
 import axios from "axios";
 import { motion } from "framer-motion";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppWrapperContext } from "../../AppWrapper";
 import Button from "../../components/button/Button";
@@ -69,13 +69,13 @@ export default function SignUp() {
 
         setLoading(true)
 
-        await axios.get('https://xylium.onrender.com/api/checksteamauth', { 
+        await axios.get(import.meta.env.VITE_BASE_API + '/api/checksteamauth', { 
             params : {
                 steamid: steamID
             }
         })
         .then((res) => {
-            axios.post('https://xylium.onrender.com/api/signup', {
+            axios.post(import.meta.env.VITE_BASE_API + '/api/signup', {
                 username: username,
                 email: email,
                 password: password,

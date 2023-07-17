@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router";
 import './NotFound.css'
 import X from '../../assets/X.svg'

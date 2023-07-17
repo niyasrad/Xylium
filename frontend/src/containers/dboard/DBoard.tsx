@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from 'framer-motion'
 import { useNavigate } from "react-router";
 import { useAppWrapperContext } from "../../AppWrapper";
@@ -8,7 +8,6 @@ import Topbar from "../../components/topbar/Topbar";
 import './DBoard.css'
 import DGamesBar from "../../components/dgamesbar/DGamesBar";
 import Nothing from "../../components/nothing/nothing";
-import Steambar from "../../components/steambar/Steambar";
 import DFriendBar from "../../components/dfriendbar/DFriendBar";
 
 export default function DBoard() {
@@ -25,7 +24,7 @@ export default function DBoard() {
     }) 
 
     useEffect(() => {
-        axios.get('https://xylium.onrender.com/api/checkauth')
+        axios.get(import.meta.env.VITE_BASE_API + '/api/checkauth')
         .then(() => {})
         .catch(() => {
             navigate('/')
@@ -33,9 +32,9 @@ export default function DBoard() {
 
         try {
             axios.all([ 
-                axios.get('https://xylium.onrender.com/user/person/me'),
-                axios.get('https://xylium.onrender.com/user/friends'), 
-                axios.get('https://xylium.onrender.com/user/games')
+                axios.get(import.meta.env.VITE_BASE_API + '/user/person/me'),
+                axios.get(import.meta.env.VITE_BASE_API + '/user/friends'), 
+                axios.get(import.meta.env.VITE_BASE_API + '/user/games')
             ])
             .then(axios.spread((res1, res2, res3) => {
                 setResult(res1.data)

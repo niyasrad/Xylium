@@ -4,8 +4,7 @@ import { useAppWrapperContext } from "../../AppWrapper";
 import { Typewriter } from 'react-simple-typewriter'
 import './Home.css'
 import Steambar from "../../components/steambar/Steambar";
-import { AnimatePresence, motion } from "framer-motion";
-import X from '../../assets/X.svg'
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router";
 import Topbar from "../../components/topbar/Topbar";
 import Loading from "../../components/loading/Loading";
@@ -64,7 +63,7 @@ export default function Home() {
     //https://xylium.onrender.com
     //http://localhost:8080
     useEffect(() => {
-        axios.get('https://xylium.onrender.com/api/checkauth')
+        axios.get(import.meta.env.VITE_BASE_API + '/api/checkauth')
         .then(() => {})
         .catch(() => {
             navigate('/')
@@ -75,9 +74,9 @@ export default function Home() {
         }
         try {
             axios.all([ 
-                axios.get('https://xylium.onrender.com/user/person/me'),
-                axios.get('https://xylium.onrender.com/user/friends'), 
-                axios.get('https://xylium.onrender.com/user/recent')
+                axios.get(import.meta.env.VITE_BASE_API + '/user/person/me'),
+                axios.get(import.meta.env.VITE_BASE_API + '/user/friends'), 
+                axios.get(import.meta.env.VITE_BASE_API + '/user/recent')
             ])
             .then(axios.spread((res1, res2, res3) => {
                 setResult(res1.data)

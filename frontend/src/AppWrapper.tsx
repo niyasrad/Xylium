@@ -59,10 +59,10 @@ function AppWrapper({ children }: { children: React.ReactNode }) {
     if (!token) return
 
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-    axios.get('https://xylium.onrender.com/api/checkauth')
+    axios.get(import.meta.env.VITE_BASE_API + '/api/checkauth')
     .then((res) => {
       setGlobalUsername!(res.data.message ? res.data.message : '')
-      axios.get('https://xylium.onrender.com/user/person/me')
+      axios.get(import.meta.env.VITE_BASE_API + '/user/person/me')
       .then((res) => {
         if (res.data.communityvisibilitystate !== 3) {
           setPrivateSteam!(true)

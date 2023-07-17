@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import './Steambar.css'
 
 export default function Steambar(friend: any) {
@@ -9,7 +9,7 @@ export default function Steambar(friend: any) {
     })
 
     useEffect(() => {
-        axios.get('https://xylium.onrender.com/user/person/steamid/'+ friend.friend.steamid)
+        axios.get(import.meta.env.VITE_BASE_API + '/user/person/steamid/'+ friend.friend.steamid)
         .then((res) =>  setHolder(res.data))
     }, [])
 

@@ -1,8 +1,6 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Navigate, RouterProvider } from 'react-router'
 import { createBrowserRouter } from 'react-router-dom'
-import App from './AppWrapper'
 import Landing from './containers/landing/Landing'
 import './index.css'
 import LogIn from './user/login/LogIn'
