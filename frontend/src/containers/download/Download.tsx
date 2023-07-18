@@ -15,12 +15,12 @@ const Download = React.forwardRef((props: any, ref: any) => {
     })
 
     useEffect(() => {
-        axios.get(`https://xylium.onrender.com/detail/account/${user}`)
+        axios.get(`${import.meta.env.VITE_BASE_API}/detail/account/${user}`)
         .then((res) => {
             setSteamValue(res.data.value ? res.data.value : 0)
         })
         .catch((err) => {})
-        axios.get(`https://xylium.onrender.com/user/recent/${user}`)
+        axios.get(`${import.meta.env.VITE_BASE_API}/user/recent/${user}`)
         .then((res) => {
             setUserData(res.data)
         })

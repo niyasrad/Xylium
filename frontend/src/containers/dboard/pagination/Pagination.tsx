@@ -32,7 +32,7 @@ export default function Pagination({ listing }: { listing: string }) {
     useEffect(() => {
         axios.get(import.meta.env.VITE_BASE_API + '/api/checkauth')
         .then(() => {
-            axios.get(`https://xylium.onrender.com/user/${ listing === "games" ? "games" : "friends"}`)
+            axios.get(`${import.meta.env.VITE_BASE_API}/user/${ listing === "games" ? "games" : "friends"}`)
             .then((res) => {
                 setItemList(listing === "games" && res.data ? res.data.games : res.data)
                 setTotalPages(Math.ceil(itemList.length / 12))
