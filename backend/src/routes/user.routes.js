@@ -105,6 +105,30 @@ router.get('/checksteamauth', async (req, res) => {
 
 })
 
+router.get('/checkcreds', async (req, res) => {
+    
+    let userNameFind = await User.findOne({ username: req.query.username })
+
+    if (userNameFind) {
+        return res.status(400).json({
+            message: "This Username is already taken!"
+        })
+    }   
+
+    let userEmailFind = await User.findOne({ email: req.query.email })
+
+    if (userEmailFind) {
+        return res.status(400).json({
+            message: "This E-mail is already registered!"
+        })
+    }
+
+    return res.status(200).json({
+        message: "Credential Check Success!"
+    })
+
+})
+
 router.get('/checkauth', authMiddleWare, (req, res) => {
     res.status(200).json({
         message: req.username
