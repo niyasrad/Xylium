@@ -51,6 +51,7 @@ router.get('/account/:username?', userAttach, async (req, res) => {
             }
         });
         detail.accountValue = totalValue.toFixed(2)
+        detail.highestValue = totalValue > detail.highestValue ? totalValue.toFixed(2) : detail.highestValue
         detail.lastRequested = Date.now()
         await detail.save()
         return res.status(200).json({
