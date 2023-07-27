@@ -1,0 +1,49 @@
+.opt-button {
+    width: 60%;
+    min-width: 8rem;
+    position: relative;
+    max-width: 100%;
+}
+
+.opt-button__bg {
+    width: 100%;
+    background-color: white;
+    height: 3rem;
+    border-radius: 1rem;
+    transition: 0.5s;
+}
+.opt-button__front {
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 1rem;
+    width: 100%;
+    height: 3rem;
+    background-size: 200% auto;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    font-size: 1.1em;
+}
+
+.opt-button:hover > .opt-button__bg {
+    background-color: yellow;
+}
+.opt-button:hover > .opt-button__front {
+    background-position: right center;
+}         
+
+
+@media only screen and (max-width: 1300px){
+
+    .opt-button {
+        width: 100%;
+    }
+
+    .opt-button__front {
+        font-size: 1em;
+    }
+}

@@ -14,6 +14,7 @@ import Xycard from './containers/xycard/Xycard'
 import NotFound from './containers/NotFound/NotFound'
 import DBoard from './containers/dboard/DBoard'
 import Pagination from './containers/dboard/pagination/Pagination'
+import Settings from './containers/settings/Settings'
 
 
 const router = createBrowserRouter([
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
   {
     path: '/friends',
     element: <Pagination listing="friends" />
+  },
+  {
+    path: '/settings',
+    element: <Settings />
   },
   {
     path: '/404',

@@ -9,6 +9,10 @@ const detailSchema = mongoose.Schema({
     accountValue: {
         type: Number
     },
+    highestValue: {
+        type: Number,
+        default: 0
+    },
     lastRequested: {
         type: Date
     }
