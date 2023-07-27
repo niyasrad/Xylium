@@ -20,6 +20,10 @@ export default function DFriendBar({ friend }: { friend : any}) {
         avatarfull: backupImage
     })
 
+    const handleError = (event: any) => {
+        event.target.src = backupImage
+    }
+
     useEffect(() => {
         axios.get(import.meta.env.VITE_BASE_API + '/user/person/steamid/'+ friend.steamid)
         .then((res) =>  {
@@ -38,6 +42,7 @@ export default function DFriendBar({ friend }: { friend : any}) {
                 src={holder.avatarfull === defaultBlank ? backupImage : holder.avatarfull} 
                 alt="Profile Picture" 
                 className="df-bar__icon" 
+                onError={handleError}
             />
             <div className="df-bar__friend">
                 <div className="df-bar__title">
