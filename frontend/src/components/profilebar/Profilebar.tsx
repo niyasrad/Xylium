@@ -11,6 +11,10 @@ export default function Profilebar({ username }: { username: string}) {
         personastate: 0
     })
 
+    const handleError = (event: any) => {
+        event.target.src = backupImage
+    }
+
 
     useEffect(() => {
         axios.get(`${import.meta.env.VITE_BASE_API}/user/person/username/${username}`)
@@ -32,7 +36,11 @@ export default function Profilebar({ username }: { username: string}) {
                 {userData.personaname}
             </div>
             <div className="pbar__image">
-                <img src={!userData.avatarfull || userData.avatarfull === '' || userData.avatarfull === defaultBlank ? backupImage : userData.avatarfull} alt="Profile Picture"/>
+                <img 
+                    src={!userData.avatarfull || userData.avatarfull === '' || userData.avatarfull === defaultBlank ? backupImage : userData.avatarfull} 
+                    alt="Profile Picture"
+                    onError={handleError}
+                />
                 <div className={`pbar__indicator ${userData.personastate === 0 ? 'pbar__indicator--away': 'pbar__indicator--online'}`}></div>
             </div>
         </div>
