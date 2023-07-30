@@ -35,10 +35,10 @@ router.get('/percentile', authMiddleWare, async (req, res) => {
         const userAccountValue = currentUserDetail.accountValue;
 
         const usersWithHigherAccountValue = await Detail.find({
-            accountValue: { $lte: userAccountValue }
+            accountValue: { $lt: userAccountValue }
         });
 
-        const percentile = (usersWithHigherAccountValue.length / (await Detail.countDocuments())) * 100;
+        const percentile = (usersWithHigherAccountValue.length / (await Detail.countDocuments() - 1)) * 100;
 
         return res.status(200).json({
             highestValue: currentUserDetail.accountValue,
