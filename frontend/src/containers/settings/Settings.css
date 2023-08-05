@@ -129,6 +129,11 @@
     font-size: 1.4em;
 }
 
+.settings__popover {
+    position: relative;
+    z-index: 997;
+}
+
 .settings__port-content {
     box-shadow: 0px 0px 34px -6px black;
     width: 100%;
