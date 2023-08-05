@@ -1,10 +1,12 @@
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import OptButton from '../../components/optbutton/OptButton'
 import Topbar from '../../components/topbar/Topbar'
 import './Settings.css'
 
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import axios from 'axios'
+import Popover, { Actions, PopoverProps } from '../../components/popover/Popover'
+import { deletePopover, emailPopover, passwordPopover } from './Settings.data'
 
 interface UserSettingData {
     username: string;
@@ -95,8 +97,42 @@ const StatsCard = () => {
 
 export default function Settings() {
 
+    const [popoverOpen, setPopoverOpen] = useState<null | PopoverProps>(null)
+
+    const handleClose = useCallback(() => {setPopoverOpen(null)}, [])
+
+    const handleClick = (option: "email" | "password" | "delete") => {
+        if (option === "email") {
+            setPopoverOpen(emailPopover)
+        } else if (option === "password") {
+            setPopoverOpen(passwordPopover)
+        } else if (option === "delete") {
+            setPopoverOpen(deletePopover)
+        }
+    }
+
     return (
         <div className="settings">
+            <AnimatePresence>
+            {
+                popoverOpen !== null &&
+                <motion.div
+                    key={JSON.stringify(popoverOpen)}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className='settings__popover'
+                >
+                    <Popover 
+                        label={popoverOpen.label || ""}
+                        operation={popoverOpen.operation || Actions.save} 
+                        onCancel={handleClose}
+                        onComplete={popoverOpen.onComplete|| null}
+                    />
+                </motion.div>
+            }
+            </AnimatePresence>
             <Topbar menu="home" />
             <div className="settings__content">
                 <motion.div
@@ -110,13 +146,16 @@ export default function Settings() {
                             <SettingCard />
                             <OptButton 
                                 text="Change E-mail"
+                                onClick={() => handleClick("email")}
                             />
                             <OptButton 
                                 text="Change Password"
+                                onClick={() => handleClick("password")}
                             />
                             <OptButton 
                                 text="Delete Account"
                                 isDelete={true}
+                                onClick={() => handleClick("delete")}
                             />
                         </div>
                     </div>
