@@ -2,22 +2,122 @@ import { useState } from "react";
 import OptButton from "../optbutton/OptButton";
 import { motion } from "framer-motion"
 import './Popover.css'
+import { useAppWrapperContext } from "../../AppWrapper";
+import axios from "axios";
 
 export enum Actions {
     del = "DELETE",
-    save = "SAVE"
+    email = "SAVE",
+    pass = "CHANGE"
 }
 
 export interface PopoverProps {
     label: string;
     operation: Actions;
-    onComplete: () => void;
+    onComplete?: () => void;
     onCancel?: () => void;
 }
 
 export default function Popover({ label, operation, onComplete, onCancel }: PopoverProps) {
 
     const [inputValue, setInputValue] = useState<string>('')
+    const { openSnackbar } = useAppWrapperContext()
+
+    const handleSubmit = () => {
+        if (!inputValue) {
+            openSnackbar!({
+                message: "Please enter a valid value",
+                type: "warning"
+            })
+        }
+
+        if (operation === Actions.email) {
+
+            const emailTest = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(inputValue)
+
+            if (!emailTest) {
+                openSnackbar!({
+                    message: "Please Enter a valid E-mail!",
+                    type: "error"
+                })
+                return
+            }
+
+            axios.post(import.meta.env.VITE_BASE_API + '/settings/change', {
+                email: inputValue
+            })
+            .then((res) => {
+                openSnackbar!({
+                    message: res.data.message,
+                    type: "success"
+                })
+                onComplete!()
+            })
+            .catch((err) => {
+                openSnackbar!({
+                    message: err.data.message,
+                    type: "error"
+                })
+            })
+
+        } else if (operation === Actions.pass) {
+
+            if (inputValue.length < 5) {
+                openSnackbar!({
+                    message: "Password needs to be longer than 4 Characters!",
+                    type: "error"
+                })
+                return
+            }
+
+            axios.post(import.meta.env.VITE_BASE_API + '/settings/change', {
+                password: inputValue
+            })
+            .then((res) => {
+                openSnackbar!({
+                    message: res.data.message,
+                    type: "success"
+                })
+                onComplete!()
+            })
+            .catch((err) => {
+                openSnackbar!({
+                    message: err.data.message,
+                    type: "error"
+                })
+            })
+
+        } else if (operation === Actions.del) {
+
+            if (inputValue.toUpperCase() !== "DELETE") {
+                openSnackbar!({
+                    message: "Please type in DELETE to confirm!",
+                    type: "warning"
+                })
+                return
+            }
+            axios.post(import.meta.env.VITE_BASE_API + '/settings/delete')
+            .then((res) => {
+                openSnackbar!({
+                    message: res.data.message,
+                    type: "success"
+                })
+                onComplete!()
+            })
+            .catch((err) => {
+                openSnackbar!({
+                    message: err.data.message,
+                    type: "error"
+                })
+            })
+
+        } else {
+            openSnackbar!({
+                message: "Invalid Operation!",
+                type: "warning"
+            })
+        }
+    }
 
     return (
         <div 
@@ -53,7 +153,7 @@ export default function Popover({ label, operation, onComplete, onCancel }: Popo
                     />
                     <OptButton 
                         text={operation}
-                        onClick={onComplete}
+                        onClick={handleSubmit}
                     />
                 </div>
             </motion.div>
