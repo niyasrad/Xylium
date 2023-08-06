@@ -126,9 +126,9 @@ export default function Settings() {
                 >
                     <Popover 
                         label={popoverOpen.label || ""}
-                        operation={popoverOpen.operation || Actions.save} 
+                        operation={popoverOpen.operation || Actions.email} 
                         onCancel={handleClose}
-                        onComplete={popoverOpen.onComplete|| null}
+                        onComplete={handleClose}
                     />
                 </motion.div>
             }
