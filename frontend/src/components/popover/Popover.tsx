@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OptButton from "../optbutton/OptButton";
 import { motion } from "framer-motion"
 import './Popover.css'
@@ -119,6 +119,24 @@ export default function Popover({ label, operation, onComplete, onCancel }: Popo
         }
     }
 
+    useEffect(() => {
+        
+        const popkey = (event: any) => {
+            if (event.key === 'Enter') {
+                handleSubmit()
+            } else if (event.key === 'Escape') {
+                onCancel!()
+            }
+        }
+
+        document.addEventListener('keydown', popkey)
+
+        return () => {
+            document.removeEventListener('keydown', popkey)
+        }
+        
+    }, [])
+
     return (
         <div 
             className="popover"
@@ -140,6 +158,7 @@ export default function Popover({ label, operation, onComplete, onCancel }: Popo
             >
                 <span className="popover__label">{label}</span>
                 <input 
+                    autoFocus={true}
                     className="popover__input" 
                     placeholder="Type Here" 
                     value={inputValue} 
