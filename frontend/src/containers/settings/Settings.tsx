@@ -7,6 +7,9 @@ import { AnimatePresence, motion } from 'framer-motion'
 import axios from 'axios'
 import Popover, { Actions, PopoverProps } from '../../components/popover/Popover'
 import { deletePopover, emailPopover, passwordPopover } from './Settings.data'
+import { useNavigate } from 'react-router'
+import Loading from '../../components/loading/Loading'
+import { useAppWrapperContext } from '../../AppWrapper'
 
 interface UserSettingData {
     username: string;
@@ -97,6 +100,10 @@ const StatsCard = () => {
 
 export default function Settings() {
 
+    const navigate = useNavigate()
+    const { isLoggedIn } = useAppWrapperContext()
+
+    const [loading, setLoading] = useState<boolean>(true)
     const [popoverOpen, setPopoverOpen] = useState<null | PopoverProps>(null)
 
     const handleClose = useCallback(() => {setPopoverOpen(null)}, [])
@@ -110,6 +117,18 @@ export default function Settings() {
             setPopoverOpen(deletePopover)
         }
     }
+
+    useEffect(() => {
+        axios.get(import.meta.env.VITE_BASE_API + '/api/checkauth')
+        .then(() => {
+            setLoading(false)
+        })
+        .catch(() => {
+            navigate('/')
+        })
+    })
+
+    if (loading || !isLoggedIn) return <Loading />
 
     return (
         <div className="settings">
