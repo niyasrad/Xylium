@@ -24,11 +24,30 @@ router.post('/change', authMiddleWare, async (req, res) => {
         }
 
         if (req.body.email) {
+
+            const emailUserSearch = await User.findOne({ email: req.body.email })
+            
+            if (emailUserSearch) {
+                return res.status(400).json({
+                    message: "E-mail already registered!"
+                })
+            }
+
             userDocument.email = req.body.email
         }
         if (req.body.password) {
+
+            const hashTest = await bcrypt.compare(req.body.password, userDocument.password)
+            
+            if (hashTest) {
+                return res.status(400).json({
+                    message: "Please enter a different password!"
+                })
+            }
+
             const passHash = await bcrypt.hash(req.body.password, 10)
             userDocument.password = passHash
+            
         }
 
         await userDocument.save()

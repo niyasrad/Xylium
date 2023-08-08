@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import './Popover.css'
 import { useAppWrapperContext } from "../../AppWrapper";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 export enum Actions {
     del = "DELETE",
@@ -21,7 +22,9 @@ export interface PopoverProps {
 export default function Popover({ label, operation, onComplete, onCancel }: PopoverProps) {
 
     const [inputValue, setInputValue] = useState<string>('')
-    const { openSnackbar } = useAppWrapperContext()
+    const { openSnackbar, handleSignOut } = useAppWrapperContext()
+
+    const navigate = useNavigate()
 
     const handleSubmit = () => {
         if (!inputValue) {
@@ -29,13 +32,14 @@ export default function Popover({ label, operation, onComplete, onCancel }: Popo
                 message: "Please enter a valid value",
                 type: "warning"
             })
+            return
         }
 
         if (operation === Actions.email) {
 
-            const emailTest = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(inputValue)
+            const emailTest = !(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(inputValue))
 
-            if (!emailTest) {
+            if (emailTest) {
                 openSnackbar!({
                     message: "Please Enter a valid E-mail!",
                     type: "error"
@@ -55,7 +59,7 @@ export default function Popover({ label, operation, onComplete, onCancel }: Popo
             })
             .catch((err) => {
                 openSnackbar!({
-                    message: err.data.message,
+                    message: err.response.data.message,
                     type: "error"
                 })
             })
@@ -82,7 +86,7 @@ export default function Popover({ label, operation, onComplete, onCancel }: Popo
             })
             .catch((err) => {
                 openSnackbar!({
-                    message: err.data.message,
+                    message: err.response.data.message,
                     type: "error"
                 })
             })
@@ -102,11 +106,12 @@ export default function Popover({ label, operation, onComplete, onCancel }: Popo
                     message: res.data.message,
                     type: "success"
                 })
-                onComplete!()
+                handleSignOut!()
+                navigate('/login')
             })
             .catch((err) => {
                 openSnackbar!({
-                    message: err.data.message,
+                    message: err.response.data.message,
                     type: "error"
                 })
             })
@@ -135,7 +140,7 @@ export default function Popover({ label, operation, onComplete, onCancel }: Popo
             document.removeEventListener('keydown', popkey)
         }
         
-    }, [])
+    }, [inputValue])
 
     return (
         <div 
