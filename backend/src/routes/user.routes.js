@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt')
 const User = require('../models/user')
 const { default: axios } = require('axios');
 const { authMiddleWare } = require('../utils/auth')
+const transporter = require('../configs/email.configs')
 
 
 router.post('/signup', async (req, res) => {
@@ -126,6 +127,96 @@ router.get('/checkcreds', async (req, res) => {
     return res.status(200).json({
         message: "Credential Check Success!"
     })
+
+})
+
+router.post('/forgotpassword', async (req, res) => {
+
+    if (!req.body.email) {
+        return res.status(400).json({
+            message: "Please Enter an Email"
+        })
+    }    
+
+    const userFind = await User.findOne({ email: req.body.email })
+    if (!userFind) {
+        return res.status(400).json({
+            message: "Please enter a registered email!"
+        })
+    }
+
+    const forgotToken = jwt.sign({ username: userFind.username }, process.env.JWT_SECRET, { expiresIn: '1h' })
+    const mailOptions = {
+        from: {
+            name: "Xylium Gamezone",
+            address: process.env.EMAIL
+        },
+        to: userFind.email,
+        subject: 'Process - Resetting Password',
+        text: `Please find the link to reset your password here, ${process.env.BASE_URL}/resetpassword/${forgotToken}`
+    }
+
+    try {
+
+        await transporter.sendMail(mailOptions)
+        return res.status(200).json({
+            message: "Reset-Password E-mailed Successfully!"
+        })
+
+    } catch(err) {
+
+        console.log(err)
+        return res.status(500).json({
+            message: "Something went wrong!"
+        })
+    
+    }
+    
+})
+
+router.post('/resetpassword', async (req, res) => {
+
+    if (!req.body.logval || !req.body.password) {
+        return res.status(400).json({
+            message: "Please check the fields!"
+        })
+    }
+
+    try {
+
+        let decoded = jwt.verify(req.body.logval, process.env.JWT_SECRET)
+
+        if (!decoded) {
+            return res.status(400).json({
+                message: "Invalid Request/Expired!"
+            })
+        }
+        const user = await User.findOne({ username: decoded.username })
+
+        if (!user) {
+            return res.status(400).json({
+                message: "Invalid ID!"
+            })
+        }
+
+        const passHash = await bcrypt.hash(req.body.password, 10)
+        user.password = passHash
+
+        await user.save()
+
+        return res.status(200).json({
+            message: "Password Successfully Set!"
+        })
+            
+
+    } catch (err) {
+
+        console.log(err)
+        return res.status(400).json({
+            message: "Invalid Request/Expired!"
+        })
+        
+    }
 
 })
 
