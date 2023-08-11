@@ -95,6 +95,7 @@ export default function LogIn() {
                     {errMessage}
                 </div>
                 <div className="sign__submit">
+                <p className="sign__submit-text">Forgot Password? <Link to="/forgotpassword" className="sign__submit-text--pink">Request Reset</Link></p>
                     <p className="sign__submit-text">Don't have an account? <Link to="/signup" className="sign__submit-text--pink">Sign up</Link></p>
                     <motion.div
                         animate={

@@ -153,7 +153,7 @@ router.post('/forgotpassword', async (req, res) => {
         },
         to: userFind.email,
         subject: 'Process - Resetting Password',
-        text: `Please find the link to reset your password here, ${process.env.BASE_URL}/resetpassword/${forgotToken}`
+        text: `Please find the link to reset your password here, ${process.env.BASE_URL}/resetpassword?logval=${forgotToken}`
     }
 
     try {
@@ -196,6 +196,14 @@ router.post('/resetpassword', async (req, res) => {
         if (!user) {
             return res.status(400).json({
                 message: "Invalid ID!"
+            })
+        }
+
+        const hashTest = await bcrypt.compare(req.body.password, user.password)
+            
+        if (hashTest) {
+            return res.status(400).json({
+                message: "Please enter a different password!"
             })
         }
 
