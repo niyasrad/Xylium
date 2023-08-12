@@ -15,6 +15,8 @@ import NotFound from './containers/NotFound/NotFound'
 import DBoard from './containers/dboard/DBoard'
 import Pagination from './containers/dboard/pagination/Pagination'
 import Settings from './containers/settings/Settings'
+import ForgotPass from './user/forgotpass/ForgotPass'
+import ResetPass from './user/resetpass/ResetPass'
 
 
 const router = createBrowserRouter([
@@ -29,6 +31,14 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <LogIn />
+  },
+  {
+    path: '/forgotpassword',
+    element: <ForgotPass />
+  },
+  {
+    path: '/resetpassword',
+    element: <ResetPass />
   },
   {
     path: '/home',

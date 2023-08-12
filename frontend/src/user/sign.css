@@ -9,6 +9,14 @@
     box-sizing: border-box;
 }
 
+.sign__loading {
+    width: 100vw;
+    height: 100vh;
+    background-color: #00000080;
+    position: fixed;
+    z-index: 999;
+}
+
 
 .sign__content {
     display: flex;
