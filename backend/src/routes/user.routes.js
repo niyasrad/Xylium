@@ -1,7 +1,13 @@
 const router = require('express').Router()
+
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const User = require('../models/user')
+
+const Handlebars = require('handlebars')
+const path = require('path')
+const fs = require('fs')
+
 const { default: axios } = require('axios');
 const { authMiddleWare } = require('../utils/auth')
 const transporter = require('../configs/email.configs')
@@ -146,6 +152,17 @@ router.post('/forgotpassword', async (req, res) => {
     }
 
     const forgotToken = jwt.sign({ username: userFind.username }, process.env.JWT_SECRET, { expiresIn: '1h' })
+
+    let data = {
+        user: userFind.username,
+        reset: `${process.env.BASE_URL}/resetpassword?logval=${forgotToken}`
+    }
+    
+    const emailTemplatePath = path.join(__dirname, '/../mailer/mailer.html')
+    const emailTemplate = fs.readFileSync(emailTemplatePath, 'utf-8');
+    const compiledTemplate = Handlebars.compile(emailTemplate);
+    const html = compiledTemplate(data);
+
     const mailOptions = {
         from: {
             name: "Xylium Gamezone",
@@ -153,7 +170,8 @@ router.post('/forgotpassword', async (req, res) => {
         },
         to: userFind.email,
         subject: 'Process - Resetting Password',
-        text: `Please find the link to reset your password here, ${process.env.BASE_URL}/resetpassword?logval=${forgotToken}`
+        text: 'XYLIUM RESET',
+        html: html
     }
 
     try {

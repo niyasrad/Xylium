@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XYLIUM - RESET PASSWORD</title>
+    <style>
+        .xylium {
+            width: 100% !important;
+            height: 100% !important;
+            background-color: #161616;
+            padding: 2rem;
+            font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+        }
+        .xylium__content {
+            max-width: 35rem;
+            border-radius: 1rem;
+            margin: auto;
+            padding: 3rem;
+            text-align: center;
+            vertical-align: middle;
+            background-color: #000000;
+        }
+        tbody {
+            vertical-align: middle;
+        }
+        img {
+            width: 200px;
+            height: 200px;
+            vertical-align: middle;
+        }
+
+        .xylium__greetings {
+            color: #FF0000;
+            font-size: 1.5em;
+            letter-spacing: 0.1rem;
+            font-weight: 400;
+        }
+        .xylium__description {
+            font-size: 1em;
+            color: white;
+        }
+
+        .xylium__division {
+            padding-top: 1.5rem;
+        }
+        .xylium__division a {
+            font-weight: 600;
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .xylium__button {
+            padding: 1.5rem;
+            border-radius: 1rem;
+            background-color: #D9D9D9;
+            display: block;
+            width: 20rem;
+            max-width: 100% !important;
+            border: none;
+            font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+            font-size: 1em;
+            font-weight: 600;
+            margin: auto;
+        }
+
+        .xylium__footer {
+            color: white;
+            vertical-align: middle;
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.8em;
+        }
+        .xylium__footer a {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <table role="presentation" class="xylium" border="0" >
+        <tbody>
+            <tr>
+                <td>
+                    <table class="xylium__content">
+                        <tbody>
+                            <tr>
+                                <td class="xylium__svg">
+                                    <img src="https://cdn.discordapp.com/attachments/1139989042251960431/1141302267983699968/X.png" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="xylium__greetings xylium__division">
+                                    Greetings, {{user}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="xylium__description xylium__division">
+                                    We received a request for resetting your password, please follow the url/button in here to complete the process. 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="xylium__division">
+                                    <a 
+                                        href="{{reset}}"
+                                        target="_blank"
+                                        class="xylium__button"
+                                    >
+                                        RESET PASSWORD
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td class="xylium__footer xylium__division">
+                    If you did not, or received this without triggering the password reset, please contact <a href="https://niyas-hameed.vercel.app/contact" target="_blank">@niyasrad</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
